@@ -39,8 +39,10 @@ select option{background:#fff !important;color:#000 !important;font-size:10pt !i
 .frow{display:grid;grid-template-columns:120px 1fr;gap:4px;align-items:center;margin-bottom:5px;}
 .fi{height:24px;border:1px solid #999;padding:0 4px;background:#fff !important;color:#000 !important;width:100%;font-size:10pt !important;font-family:inherit;}
 .fi.ro{background:#e4e4e4 !important;color:#666 !important;}
+.fi.sys{background:#eaf3de !important;color:#27500a !important;border-color:#a0c878 !important;}
 .fi option{font-size:10pt !important;background:#fff !important;color:#000 !important;}
 .bg-a{font-size:8pt;padding:1px 4px;background:#e0f4e0;border:1px solid #5aaa5a;color:#1a6a1a !important;margin-left:3px;}
+.bg-sys{font-size:8pt;padding:1px 4px;background:#eaf3de;border:1px solid #a0c878;color:#27500a !important;margin-left:3px;}
 .bg-t{font-size:8pt;padding:1px 4px;background:#fff8d0;border:1px dashed #c89000;color:#8a6000 !important;margin-left:3px;}
 .signer-block{background:#fff;border:1px solid #ccc;padding:8px 10px;margin-bottom:6px;}
 .signer-block.c0{border-left:3px solid #4a6fa5;}
@@ -52,8 +54,9 @@ select option{background:#fff !important;color:#000 !important;font-size:10pt !i
 .stitle.c2{color:#105010 !important;}.stitle.c3{color:#604010 !important;}
 .srow{display:grid;grid-template-columns:110px 1fr;gap:4px;align-items:center;margin-bottom:4px;}
 .note-sm{font-size:8pt;color:#666 !important;padding-left:114px;margin-top:2px;}
+.note-sys{font-size:8pt;color:#27500a !important;padding-left:114px;margin-top:2px;}
 .order-badge{font-size:8pt;padding:1px 6px;background:#d0dcf0;border:1px solid #7a9fd5;color:#1a3a6a !important;}
-.flow-bar{display:flex;align-items:center;gap:0;margin-bottom:10px;flex-wrap:wrap;gap:2px;}
+.flow-bar{display:flex;align-items:center;gap:2px;margin-bottom:10px;flex-wrap:wrap;}
 .flow-step{padding:3px 10px;font-size:9pt;background:#d0dcf0;border:1px solid #7a9fd5;color:#1a3a6a !important;}
 .flow-step.done{background:#e0f4e0;border-color:#5aaa5a;color:#1a6a1a !important;}
 .flow-step.active{background:#4a6fa5;color:#fff !important;font-weight:bold;}
@@ -137,19 +140,16 @@ select option{background:#fff !important;color:#000 !important;font-size:10pt !i
         <span>主治醫師：</span><span id="pD" class="pe">—</span>
       </div>
 
-      <!-- S1 文件預覽 -->
       <div class="sc on" id="s1">
         <div class="docarea">
           <div class="paper">
-            <div class="ptitle" id="docTitle">羅東博愛醫院<br>麻醉同意書</div>
-            <div style="text-align:center;font-size:8pt;margin-bottom:4px;" id="docCode">ANES001 v2.0</div>
+            <div class="ptitle">羅東博愛醫院<br>麻醉同意書</div>
+            <div style="text-align:center;font-size:8pt;margin-bottom:4px;">ANES001 v2.0</div>
             <hr class="phr">
-            <div id="docBody">
-              <div>病患姓名：<span class="mk">${Textfield,patient_name,signer2,100}</span>　病歷號：<span class="mk">${Textfield,med_no,signer2,80}</span></div>
-              <div>主治醫師：<span class="mk">${Textfield,doctor_name,signer1,80}</span></div>
-              <div>麻醉科醫師：<span class="mk">${Textfield,anes_doctor,signer3,80}</span></div>
-              <div>手術日期：<span class="mk">${Datefield,op_date,signer1,90}</span></div>
-            </div>
+            <div>病患姓名：<span class="mk">${Textfield,patient_name,signer2,100}</span>　病歷號：<span class="mk">${Textfield,med_no,signer2,80}</span></div>
+            <div>主治醫師：<span class="mk">${Textfield,doctor_name,signer1,80}</span></div>
+            <div>麻醉科醫師：<span class="mk">${Textfield,anes_doctor,signer3,80}</span></div>
+            <div>手術日期：<span class="mk">${Datefield,op_date,signer1,90}</span></div>
             <hr class="phr">
             <div style="font-weight:bold;">一、麻醉說明</div>
             <div style="font-size:8pt;line-height:1.8;">麻醉科醫師已說明麻醉方式、風險及注意事項。</div>
@@ -170,21 +170,18 @@ select option{background:#fff !important;color:#000 !important;font-size:10pt !i
         </div>
       </div>
 
-      <!-- S2 確認簽署者（送出前） -->
       <div class="sc" id="s2">
         <div class="carea">
           <div class="cbox">
             <div class="ctitle">送出簽署任務 — 確認簽署者</div>
             <div class="flow-bar">
-              <span class="flow-step active">① HIS 確認簽署者身份</span>
+              <span class="flow-step active">① HIS 確認簽署者</span>
               <span class="flow-arrow">→</span>
               <span class="flow-step">② 打點點簽 API</span>
               <span class="flow-arrow">→</span>
-              <span class="flow-step">③ 點點簽解析欄位＋回傳連結</span>
+              <span class="flow-step">③ 解析欄位＋回傳連結</span>
             </div>
-            <div class="cnote">
-              請先確認每個 signer 對應的實際人員與信箱，確認後 HIS 將一次打 API 給點點簽，由點點簽完成解析欄位並回傳各簽署者的專屬連結。
-            </div>
+            <div class="cnote">確認各簽署者身份後，HIS 一次打 API 給點點簽，點點簽完成欄位解析並回傳專屬連結。</div>
 
             <div class="shd">任務基本設定</div>
             <div class="frow"><span>任務名稱</span><input type="text" class="fi" id="taskName"></div>
@@ -204,7 +201,7 @@ select option{background:#fff !important;color:#000 !important;font-size:10pt !i
             <div class="shd" id="signerShdTitle">簽署者指定</div>
             <div id="signerBlocks"></div>
 
-            <div class="shd">API 請求預覽（確認後一次送出給點點簽）</div>
+            <div class="shd">API 請求預覽</div>
             <div class="acode" id="apiPrev"></div>
           </div>
         </div>
@@ -214,7 +211,6 @@ select option{background:#fff !important;color:#000 !important;font-size:10pt !i
         </div>
       </div>
 
-      <!-- S3 loading -->
       <div class="sc" id="s3">
         <div class="loading-wrap">
           <div class="spinner"></div>
@@ -223,17 +219,16 @@ select option{background:#fff !important;color:#000 !important;font-size:10pt !i
         </div>
       </div>
 
-      <!-- S4 完成 -->
       <div class="sc" id="s4">
         <div class="rarea">
           <div class="rbox">
             <div class="rok">✓ 完成，點點簽已解析欄位並回傳各簽署者連結</div>
             <div class="flow-bar" style="margin-bottom:10px;">
-              <span class="flow-step done">① HIS 確認簽署者身份</span>
+              <span class="flow-step done">① HIS 確認簽署者</span>
               <span class="flow-arrow">→</span>
               <span class="flow-step done">② 打點點簽 API</span>
               <span class="flow-arrow">→</span>
-              <span class="flow-step done">③ 點點簽解析欄位＋回傳連結</span>
+              <span class="flow-step done">③ 解析欄位＋回傳連結</span>
             </div>
             <table class="rt" id="resultTable"></table>
             <div class="acode" style="margin-top:10px;" id="responseCode"></div>
@@ -241,43 +236,40 @@ select option{background:#fff !important;color:#000 !important;font-size:10pt !i
         </div>
         <div class="bbar"><button onclick="rst()" style="font-weight:bold;">完成，返回文件</button></div>
       </div>
-
     </div>
   </div>
 </div>
 
 <script>
+const HOSPITAL_EMAIL = 'patient@boai.hospital.com.tw';
 const DB={
-  P001:{name:'李小華',med:'MR-20240815',doc:'陳大文',dept:'外科',email:'patient_MR20240815@his.hospital.com.tw'},
-  P002:{name:'王大明',med:'MR-20231102',doc:'林淑芬',dept:'內科',email:'patient_MR20231102@his.hospital.com.tw'}
+  P001:{name:'李小華',med:'MR-20240815',doc:'陳大文',dept:'外科'},
+  P002:{name:'王大明',med:'MR-20231102',doc:'林淑芬',dept:'內科'}
 };
 const staffList=[
-  {val:'陳大文|醫師',email:'chen.dawen@hospital.com.tw',label:'陳大文　醫師（外科）'},
-  {val:'王志明|醫師',email:'wang.zhiming@hospital.com.tw',label:'王志明　醫師（外科）'},
-  {val:'黃建國|醫師',email:'huang.jianguo@hospital.com.tw',label:'黃建國　醫師（麻醉科）'},
-  {val:'林淑芬|護理師',email:'lin.shufen@hospital.com.tw',label:'林淑芬　護理師'},
-  {val:'張雅婷|護理師',email:'chang.yating@hospital.com.tw',label:'張雅婷　護理師'},
+  {val:'陳大文|醫師',email:'chen.dawen@boai.hospital.com.tw',label:'陳大文　醫師（外科）'},
+  {val:'王志明|醫師',email:'wang.zhiming@boai.hospital.com.tw',label:'王志明　醫師（外科）'},
+  {val:'黃建國|醫師',email:'huang.jianguo@boai.hospital.com.tw',label:'黃建國　醫師（麻醉科）'},
+  {val:'林淑芬|護理師',email:'lin.shufen@boai.hospital.com.tw',label:'林淑芬　護理師'},
+  {val:'張雅婷|護理師',email:'chang.yating@boai.hospital.com.tw',label:'張雅婷　護理師'},
 ];
 const templates={
-  ANES001:{code:'ANES001',name:'羅東博愛麻醉同意書',
-    signers:[
-      {id:'signer1',role:'醫護人員',source:'staff',hint:'主治醫師'},
-      {id:'signer2',role:'病患',source:'patient',hint:'病患'},
-      {id:'signer3',role:'醫護人員',source:'staff',hint:'麻醉科醫師'},
-      {id:'signer4',role:'家屬',source:'family',hint:'家屬見證'},
-    ]},
-  CRS004:{code:'CRS004',name:'乙狀結腸鏡檢查同意書',
-    signers:[
-      {id:'signer1',role:'醫護人員',source:'staff',hint:'主治醫師'},
-      {id:'signer2',role:'病患',source:'patient',hint:'病患'},
-    ]},
-  CS001:{code:'CS001',name:'肺切除手術同意書',
-    signers:[
-      {id:'signer1',role:'醫護人員',source:'staff',hint:'主治醫師'},
-      {id:'signer2',role:'醫護人員',source:'staff',hint:'護理師見證'},
-      {id:'signer3',role:'病患',source:'patient',hint:'病患'},
-      {id:'signer4',role:'家屬',source:'family',hint:'家屬／法代'},
-    ]},
+  ANES001:{code:'ANES001',name:'羅東博愛麻醉同意書',signers:[
+    {id:'signer1',source:'staff',hint:'主治醫師'},
+    {id:'signer2',source:'patient',hint:'病患'},
+    {id:'signer3',source:'staff',hint:'麻醉科醫師'},
+    {id:'signer4',source:'family',hint:'家屬見證'},
+  ]},
+  CRS004:{code:'CRS004',name:'乙狀結腸鏡檢查同意書',signers:[
+    {id:'signer1',source:'staff',hint:'主治醫師'},
+    {id:'signer2',source:'patient',hint:'病患'},
+  ]},
+  CS001:{code:'CS001',name:'肺切除手術同意書',signers:[
+    {id:'signer1',source:'staff',hint:'主治醫師'},
+    {id:'signer2',source:'staff',hint:'護理師見證'},
+    {id:'signer3',source:'patient',hint:'病患'},
+    {id:'signer4',source:'family',hint:'家屬／法代'},
+  ]},
 };
 const colors=['c0','c1','c2','c3'];
 let curP=null, curTmpl=templates.ANES001;
@@ -294,9 +286,7 @@ function onP(){
   const v=document.getElementById('ps').value;
   document.getElementById('warnMsg').style.display='none';
   if(!v){curP=null;
-    document.getElementById('pN').textContent='（尚未選擇）';document.getElementById('pN').className='pe';
-    document.getElementById('pM').textContent='—';document.getElementById('pM').className='pe';
-    document.getElementById('pD').textContent='—';document.getElementById('pD').className='pe';
+    ['pN','pM','pD'].forEach(id=>{const e=document.getElementById(id);e.className='pe';e.textContent=id==='pN'?'（尚未選擇）':'—';});
     return;
   }
   curP=DB[v];
@@ -312,7 +302,7 @@ function goConfirm(){
   document.getElementById('c2').value=curP.med;
   document.getElementById('c3').value=curP.doc;
   document.getElementById('taskName').value=curP.name+'_'+curTmpl.name+'_20260410';
-  document.getElementById('signerShdTitle').textContent='簽署者指定（共 '+curTmpl.signers.length+' 位，依範本標記定義）';
+  document.getElementById('signerShdTitle').textContent='簽署者指定（共 '+curTmpl.signers.length+' 位）';
   renderSigners();
   sh('s2');
 }
@@ -323,8 +313,7 @@ function renderSigners(){
   let html='';
   signers.forEach((s,i)=>{
     const col=colors[i%4];
-    const orderTxt=isSeq?'第 '+(i+1)+' 順位簽署':'同時簽署';
-    const badge=`<span class="order-badge">${orderTxt}</span>`;
+    const badge=`<span class="order-badge">${isSeq?'第 '+(i+1)+' 順位':'同時簽署'}</span>`;
     if(s.source==='staff'){
       const opts=staffList.map(st=>`<option value="${st.val}">${st.label}</option>`).join('');
       html+=`<div class="signer-block ${col}">
@@ -333,14 +322,18 @@ function renderSigners(){
           <select class="fi" id="sel_${s.id}" onchange="onStaffCh('${s.id}')">${opts}</select>
         </div>
         <div class="srow"><span>信箱</span><input type="text" class="fi ro" readonly id="email_${s.id}"></div>
-        <div class="note-sm">信箱由 HIS 人員帳號帶入，不可修改。</div>
+        <div class="note-sm">信箱由 HIS 人員帳號預設帶入，不可修改。</div>
       </div>`;
     } else if(s.source==='patient'){
       html+=`<div class="signer-block ${col}">
         <div class="stitle ${col}">${s.id}　<span class="bg-t">${s.hint}</span> ${badge}</div>
-        <div class="srow"><span>姓名</span><input type="text" class="fi ro" readonly value="${curP.name}"></div>
-        <div class="srow"><span>信箱</span><input type="text" class="fi ro" readonly value="${curP.email}"></div>
-        <div class="note-sm">由 HIS 病患資料自動帶入，不可修改。</div>
+        <div class="srow"><span>姓名</span>
+          <input type="text" class="fi ro" readonly value="${curP?curP.name:''}">
+        </div>
+        <div class="srow"><span>信箱</span>
+          <input type="text" class="fi sys" readonly value="${HOSPITAL_EMAIL}">
+        </div>
+        <div class="note-sys">醫院共用預設信箱，由 HIS 系統統一帶入，不可修改。</div>
       </div>`;
     } else {
       html+=`<div class="signer-block ${col}">
@@ -356,15 +349,12 @@ function renderSigners(){
     }
   });
   document.getElementById('signerBlocks').innerHTML=html;
-  curTmpl.signers.forEach(s=>{
-    if(s.source==='staff') onStaffCh(s.id);
-  });
+  signers.forEach(s=>{if(s.source==='staff') onStaffCh(s.id);});
   updateApi();
 }
 
 function onStaffCh(sid){
-  const sel=document.getElementById('sel_'+sid);
-  if(!sel)return;
+  const sel=document.getElementById('sel_'+sid);if(!sel)return;
   const found=staffList.find(st=>st.val===sel.value);
   if(found) document.getElementById('email_'+sid).value=found.email;
   updateApi();
@@ -374,33 +364,32 @@ function updateApi(){
   const signers=curTmpl.signers;
   const isSeq=document.getElementById('modeSelect').value==='seq';
   const taskName=document.getElementById('taskName')?document.getElementById('taskName').value:'';
-  let signerLines=signers.map((s,i)=>{
-    let name='',email='',role=s.role;
+  let lines=signers.map((s,i)=>{
+    let name='',email='',role='';
     if(s.source==='staff'){
       const sel=document.getElementById('sel_'+s.id);
       const k=sel?sel.value:'';const pts=k.split('|');
       name=pts[0]||'';role=pts[1]||'醫護';
       const f=staffList.find(st=>st.val===k);email=f?f.email:'';
     } else if(s.source==='patient'){
-      name=curP?curP.name:'';email=curP?curP.email:'';role='病患';
+      name=curP?curP.name:'';email=HOSPITAL_EMAIL;role='病患';
     } else {
       const ni=document.getElementById('fname_'+s.id);
       const ei=document.getElementById('femail_'+s.id);
       name=ni?ni.value:'';email=ei?ei.value:'';role='家屬';
     }
-    const order=isSeq?(i+1):'null';
-    return `    { <span class="k">"signer_id"</span>: <span class="v">"${s.id}"</span>, <span class="k">"name"</span>: <span class="v">"${name}"</span>, <span class="k">"role"</span>: <span class="v">"${role}"</span>,\n      <span class="k">"email"</span>: <span class="v">"${email}"</span>, <span class="k">"order"</span>: <span class="n">${order}</span> }`;
+    return `    { <span class="k">"signer_id"</span>: <span class="v">"${s.id}"</span>, <span class="k">"name"</span>: <span class="v">"${name}"</span>, <span class="k">"role"</span>: <span class="v">"${role}"</span>,\n      <span class="k">"email"</span>: <span class="v">"${email}"</span>, <span class="k">"order"</span>: <span class="n">${isSeq?i+1:'null'}</span> }`;
   }).join(',\n');
 
   const el=document.getElementById('apiPrev');
   if(!el)return;
   el.innerHTML=
-`<span class="c">// POST /api/v1/tasks　— HIS 一次送出，點點簽完成所有處理</span>
+`<span class="c">// POST /api/v1/tasks</span>
 {
   <span class="k">"task_name"</span>: <span class="v">"${taskName}"</span>,
   <span class="k">"task_type"</span>: <span class="v">"${isSeq?'sequential':'parallel'}"</span>,
   <span class="k">"signers"</span>: [
-${signerLines}
+${lines}
   ],
   <span class="k">"prefill_data"</span>: [
     { <span class="k">"field_id"</span>: <span class="v">"patient_name"</span>, <span class="k">"value"</span>: <span class="v">"${curP?curP.name:''}"</span> },
@@ -412,9 +401,8 @@ ${signerLines}
 
 function doSendApi(){
   sh('s3');
-  const steps=['送出 PDF 與簽署者資料至點點簽','點點簽解析 PDF 標記中...','自動建立各 signer 簽署欄位...','產生專屬簽署連結'];
-  let i=0;
-  const el=document.getElementById('loadingStep');
+  const steps=['送出 PDF 與簽署者資料至點點簽','點點簽解析 PDF 標記中...','自動建立各 signer 簽署欄位...','產生專屬簽署連結，回傳 HIS'];
+  let i=0;const el=document.getElementById('loadingStep');
   const iv=setInterval(()=>{
     if(i<steps.length){el.textContent=steps[i++];}
     else{clearInterval(iv);buildResult();sh('s4');}
@@ -434,20 +422,20 @@ function buildResult(){
   <tr><td>簽署模式</td><td>${isSeq?'有序':'無序'}</td></tr>
   <tr><th colspan="2">各簽署者專屬連結（點點簽回傳）</th></tr>`;
   signers.forEach((s,i)=>{
-    let name='',role='';
+    let name='',role='',email='';
     if(s.source==='staff'){const sel=document.getElementById('sel_'+s.id);const k=sel?sel.value.split('|'):['—',''];name=k[0];role=k[1];}
-    else if(s.source==='patient'){name=curP?curP.name:'—';role='病患';}
+    else if(s.source==='patient'){name=curP?curP.name:'—';role='病患';email=HOSPITAL_EMAIL;}
     else{const ni=document.getElementById('fname_'+s.id);name=ni&&ni.value?ni.value:'（未填）';role='家屬';}
     rows+=`<tr><td>${s.id}<br><span style="font-size:8pt;">${name}　${role}</span></td>
-    <td style="font-size:8pt;font-family:monospace;color:#1a3a6a !important;">https://sign.dotdotsign.com/s/${urls[i]}</td></tr>`;
+    <td><div style="font-size:8pt;font-family:monospace;color:#1a3a6a !important;">https://sign.dotdotsign.com/s/${urls[i]}</div>
+    ${s.source==='patient'?`<div style="font-size:8pt;color:#27500a !important;">連結發送至：${HOSPITAL_EMAIL}</div>`:''}</td></tr>`;
   });
   document.getElementById('resultTable').innerHTML=rows;
-
   document.getElementById('responseCode').innerHTML=
 `<span class="ok">← 200 OK　點點簽回傳</span>
 {
-  <span class="k">"task_id"</span>: <span class="v">"task_${curTmpl.code}_20260406_001"</span>,
-  <span class="k">"status"</span>:   <span class="v">"pending_sign"</span>,
+  <span class="k">"task_id"</span>:    <span class="v">"task_${curTmpl.code}_20260406_001"</span>,
+  <span class="k">"status"</span>:     <span class="v">"pending_sign"</span>,
   <span class="k">"sign_urls"</span>: {
 ${signers.map((s,i)=>`    <span class="k">"${s.id}"</span>: <span class="v">"https://sign.dotdotsign.com/s/${urls[i]}"</span>`).join(',\n')}
   }

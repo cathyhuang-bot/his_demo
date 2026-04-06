@@ -14,7 +14,7 @@ button *{color:#000 !important;}
 button:disabled{opacity:0.45;cursor:default;}
 button:disabled:hover{background:#f0f0f0 !important;}
 select{height:24px;border:1px solid #999;background:#fff !important;color:#000 !important;padding:0 4px;font-family:"Microsoft JhengHei",Arial,sans-serif;font-size:10pt !important;-webkit-appearance:auto;appearance:auto;}
-select option{background:#fff !important;color:#000 !important;font-size:10pt !important;font-family:"Microsoft JhengHei",Arial,sans-serif;}
+select option{background:#fff !important;color:#000 !important;font-size:10pt !important;}
 input[type=text]{height:24px;border:1px solid #999;background:#fff !important;color:#000 !important;padding:0 4px;font-family:inherit;font-size:10pt;}
 .sep{width:1px;height:16px;background:#bbb;margin:0 3px;flex-shrink:0;}
 .layout{display:grid;grid-template-columns:230px 1fr;}
@@ -65,6 +65,7 @@ input[type=text]{height:24px;border:1px solid #999;background:#fff !important;co
 .rt td:first-child{background:#f0f0f0;width:120px;}
 .tp{font-size:8pt;padding:0 5px;background:#fff8d0;border:1px solid #d4b800;color:#8a6000 !important;}
 .td{font-size:8pt;padding:0 5px;background:#e0f4e0;border:1px solid #5aaa5a;color:#1a6a1a !important;}
+.warn{background:#fff3cd;border:1px solid #ffc107;padding:4px 10px;font-size:9pt;color:#856404 !important;margin-top:4px;display:none;}
 </style>
 
 <div class="win">
@@ -130,14 +131,14 @@ input[type=text]{height:24px;border:1px solid #999;background:#fff !important;co
           <option value="P001">病歷號 MR-20240815　李小華</option>
           <option value="P002">病歷號 MR-20231102　王大明</option>
         </select>
-        <button id="insBtn" onclick="doIns()" disabled>插入</button>
         <div class="sep"></div>
         <input type="checkbox"><span style="margin-left:3px;">測試資料</span>
         <button style="margin-left:4px;">🖨 預覽 ▼</button>
         <div class="sep"></div>
         <button onclick="alert('在游標位置插入標記語法')">📌 插入標記</button>
-        <button id="sendBtn" onclick="goCf()" disabled style="background:#f0f0f0;border:1px solid #999;color:#000 !important;font-weight:bold;">▶ 送出簽署任務</button>
+        <button id="sendBtn" onclick="goCf()" style="font-weight:bold;">▶ 送出簽署任務</button>
       </div>
+      <div id="warnMsg" class="warn">請先選擇病患資料後再送出任務。</div>
       <div class="patbar">
         <span>已選病患：</span><span id="pN" class="pe">（尚未選擇）</span>
         <span>病歷號：</span><span id="pM" class="pe">—</span>
@@ -165,7 +166,7 @@ input[type=text]{height:24px;border:1px solid #999;background:#fff !important;co
           </div>
         </div>
         <div class="stbar">
-          <span id="st">就緒｜識別到 7 個標記欄位｜請先選擇病患並點「插入」</span>
+          <span id="st">就緒｜識別到 7 個標記欄位｜請選擇病患後點「送出簽署任務」</span>
           <span>287744 KB</span><span>GC</span>
         </div>
       </div>
@@ -238,18 +239,37 @@ input[type=text]{height:24px;border:1px solid #999;background:#fff !important;co
 
 <script>
 const DB={P001:{name:'李小華',med:'MR-20240815',doc:'陳大文',dept:'外科'},P002:{name:'王大明',med:'MR-20231102',doc:'林淑芬',dept:'內科'}};
-function onP(){document.getElementById('insBtn').disabled=!document.getElementById('ps').value;}
-function doIns(){
-  const v=document.getElementById('ps').value;if(!v)return;const p=DB[v];
-  function sv(id,t,c){const e=document.getElementById(id);e.textContent=t;e.className=c;}
-  sv('pN',p.name,'pv');sv('pM',p.med,'pv');sv('pD',p.doc,'pv');sv('pDp',p.dept,'pv');
+function onP(){
+  const v=document.getElementById('ps').value;
+  const w=document.getElementById('warnMsg');
+  w.style.display='none';
+  if(!v){
+    ['pN','pM','pD','pDp'].forEach(id=>{const e=document.getElementById(id);e.className='pe';});
+    document.getElementById('pN').textContent='（尚未選擇）';
+    document.getElementById('pM').textContent='—';
+    document.getElementById('pD').textContent='—';
+    document.getElementById('pDp').textContent='—';
+    const rv={m1:'${Textfield,patient_name,signer2,100}',m2:'${Textfield,med_no,signer2,80}',m3:'${Textfield,doctor_name,signer1,80}',m4:'${Textfield,dept,signer1,60}'};
+    Object.entries(rv).forEach(([id,val])=>{const e=document.getElementById(id);e.textContent=val;e.className='mk';});
+    document.getElementById('st').textContent='就緒｜識別到 7 個標記欄位｜請選擇病患後點「送出簽署任務」';
+    return;
+  }
+  const p=DB[v];
+  function sv(id,t){const e=document.getElementById(id);e.textContent=t;e.className='pv';}
+  sv('pN',p.name);sv('pM',p.med);sv('pD',p.doc);sv('pDp',p.dept);
   function mk(id,t){const e=document.getElementById(id);e.textContent=t;e.className='mk ok';}
   mk('m1',p.name);mk('m2',p.med);mk('m3',p.doc);mk('m4',p.dept);
-  document.getElementById('st').textContent='已選病患：'+p.name+'（'+p.med+'）｜7 個標記欄位｜4 個已帶入';
-  document.getElementById('sendBtn').disabled=false;
+  document.getElementById('st').textContent='已選病患：'+p.name+'（'+p.med+'）｜可點「送出簽署任務」';
 }
 function goCf(){
-  const v=document.getElementById('ps').value;if(!v)return;const p=DB[v];
+  const v=document.getElementById('ps').value;
+  if(!v){
+    const w=document.getElementById('warnMsg');
+    w.style.display='block';
+    return;
+  }
+  document.getElementById('warnMsg').style.display='none';
+  const p=DB[v];
   document.getElementById('c1').value=p.name;document.getElementById('c2').value=p.med;
   document.getElementById('c3').value=p.doc;document.getElementById('c4').value=p.dept;
   document.getElementById('a1').textContent='"'+p.doc+'"';document.getElementById('a2').textContent='"'+p.name+'"';
@@ -260,13 +280,8 @@ function goCf(){
 }
 function sh(id){['s1','s2','s3'].forEach(s=>{document.getElementById(s).className='sc'+(s===id?' on':'');});}
 function rst(){
-  document.getElementById('ps').value='';document.getElementById('insBtn').disabled=true;document.getElementById('sendBtn').disabled=true;
-  ['pN','pM','pD','pDp'].forEach(id=>{const e=document.getElementById(id);e.className='pe';});
-  document.getElementById('pN').textContent='（尚未選擇）';document.getElementById('pM').textContent='—';
-  document.getElementById('pD').textContent='—';document.getElementById('pDp').textContent='—';
-  const rv={m1:'${Textfield,patient_name,signer2,100}',m2:'${Textfield,med_no,signer2,80}',m3:'${Textfield,doctor_name,signer1,80}',m4:'${Textfield,dept,signer1,60}'};
-  Object.entries(rv).forEach(([id,v])=>{const e=document.getElementById(id);e.textContent=v;e.className='mk';});
-  document.getElementById('st').textContent='就緒｜識別到 7 個標記欄位｜請先選擇病患並點「插入」';
+  document.getElementById('ps').value='';
+  onP();
   sh('s1');
 }
 </script>

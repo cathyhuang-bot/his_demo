@@ -5,67 +5,75 @@
 .hdr{background:linear-gradient(to right,#4a6fa5,#7a9fd5);padding:3px 8px;display:flex;align-items:center;justify-content:space-between;}
 .hdr *{color:#fff !important;}
 .mnb{background:#f0f0f0;border-bottom:1px solid #bbb;padding:1px 2px;display:flex;}
-.mn{padding:2px 10px;cursor:pointer;}
-.mn:hover{background:#e0e0e0;}
+.mn{padding:2px 10px;cursor:pointer;}.mn:hover{background:#e0e0e0;}
 .tb{background:#fff;border-bottom:1px solid #bbb;padding:4px 6px;display:flex;align-items:center;gap:4px;flex-wrap:wrap;}
 button{padding:1px 8px;border:1px solid #999;background:#f0f0f0;color:#000 !important;cursor:pointer;height:24px;white-space:nowrap;display:inline-flex;align-items:center;gap:2px;font-size:10pt;font-family:inherit;}
 button:hover{background:#e0e0e0 !important;}
-button *{color:#000 !important;}
 button:disabled{opacity:0.45;cursor:default;}
-button:disabled:hover{background:#f0f0f0 !important;}
-select{height:24px;border:1px solid #999;background:#fff !important;color:#000 !important;padding:0 4px;font-family:"Microsoft JhengHei",Arial,sans-serif;font-size:10pt !important;-webkit-appearance:auto;appearance:auto;}
+select,input[type=text]{height:24px;border:1px solid #999;background:#fff !important;color:#000 !important;padding:0 4px;font-family:inherit;font-size:10pt !important;}
 select option{background:#fff !important;color:#000 !important;font-size:10pt !important;}
-input[type=text]{height:24px;border:1px solid #999;background:#fff !important;color:#000 !important;padding:0 4px;font-family:inherit;font-size:10pt;}
 .sep{width:1px;height:16px;background:#bbb;margin:0 3px;flex-shrink:0;}
 .layout{display:grid;grid-template-columns:230px 1fr;}
 .sb{background:#fff;border-right:1px solid #bbb;height:450px;overflow-y:auto;}
 .sbhd{display:grid;grid-template-columns:78px 1fr;background:#d0dcf0;border-bottom:1px solid #bbb;padding:3px 5px;font-weight:bold;}
 .sbi{display:grid;grid-template-columns:78px 1fr;padding:3px 5px;border-bottom:1px solid #eee;cursor:pointer;}
-.sbi:hover{background:#e0e0e0;}
-.sbi.on{background:#4a6fa5;}
-.sbi.on *{color:#fff !important;}
+.sbi:hover{background:#e0e0e0;}.sbi.on{background:#4a6fa5;}.sbi.on *{color:#fff !important;}
 .main{display:flex;flex-direction:column;height:450px;}
 .ibar{background:#f0f0f0;border-bottom:1px solid #bbb;padding:3px 6px;display:flex;align-items:center;gap:5px;flex-wrap:wrap;}
 .patbar{background:#fffde7;border-bottom:1px solid #d4b800;padding:3px 8px;display:flex;align-items:center;gap:10px;}
-.pe{font-style:italic;opacity:0.45;}
-.pv{font-weight:bold;}
-.sc{display:none;flex-direction:column;flex:1;overflow:hidden;}
-.sc.on{display:flex;}
+.pe{font-style:italic;opacity:0.45;}.pv{font-weight:bold;}
+.sc{display:none;flex-direction:column;flex:1;overflow:hidden;}.sc.on{display:flex;}
 .docarea{flex:1;background:#888;overflow-y:auto;padding:8px;}
 .paper{background:#fff;width:500px;margin:0 auto;padding:18px 28px;line-height:1.9;box-shadow:1px 2px 5px rgba(0,0,0,.4);}
 .ptitle{text-align:center;font-size:11pt;font-weight:bold;margin-bottom:2px;}
 .phr{border:none;border-top:1px solid #888;margin:5px 0;}
 .mk{display:inline-block;font-size:7pt;padding:0 2px;border:1px dashed #c89000;background:#fff8d0;color:#8a6000 !important;font-family:monospace;vertical-align:middle;}
-.mk.ok{border:1px solid #5aaa5a;background:#e0f4e0;color:#1a6a1a !important;}
 .stbar{background:#f0f0f0;border-top:1px solid #bbb;padding:2px 6px;display:flex;gap:10px;}
 .stbar span{padding-right:10px;border-right:1px solid #bbb;}
 .carea{flex:1;background:#888;overflow-y:auto;padding:8px;}
-.cbox{background:#f0f0f0;border:1px solid #aaa;padding:12px;width:530px;margin:0 auto;}
+.cbox{background:#f0f0f0;border:1px solid #aaa;padding:12px;width:580px;margin:0 auto;}
 .ctitle{font-size:11pt;font-weight:bold;color:#1a3a6a !important;border-bottom:2px solid #4a6fa5;padding-bottom:4px;margin-bottom:8px;}
-.cnote{background:#fffde7;border:1px solid #d4b800;padding:4px 8px;margin-bottom:10px;line-height:1.6;}
+.cnote{background:#e8f0fb;border:1px solid #7a9fd5;padding:5px 10px;margin-bottom:10px;line-height:1.7;font-size:9pt;}
 .shd{background:#4a6fa5;font-weight:bold;padding:2px 8px;margin:8px 0 5px;}
 .shd,.shd *{color:#fff !important;}
-.frow{display:grid;grid-template-columns:130px 1fr;gap:4px;align-items:center;margin-bottom:4px;}
-.fi{height:24px;border:1px solid #999;padding:0 4px;background:#fff !important;color:#000 !important;width:100%;font-size:10pt !important;font-family:"Microsoft JhengHei",Arial,sans-serif;}
+.frow{display:grid;grid-template-columns:120px 1fr;gap:4px;align-items:center;margin-bottom:5px;}
+.fi{height:24px;border:1px solid #999;padding:0 4px;background:#fff !important;color:#000 !important;width:100%;font-size:10pt !important;font-family:inherit;}
+.fi.ro{background:#e4e4e4 !important;color:#666 !important;}
 .fi option{font-size:10pt !important;background:#fff !important;color:#000 !important;}
-.fi.ro{background:#e4e4e4 !important;}
 .bg-a{font-size:8pt;padding:1px 4px;background:#e0f4e0;border:1px solid #5aaa5a;color:#1a6a1a !important;margin-left:3px;}
 .bg-t{font-size:8pt;padding:1px 4px;background:#fff8d0;border:1px dashed #c89000;color:#8a6000 !important;margin-left:3px;}
-.acode{background:#1e1e1e;padding:8px;font-size:8pt;font-family:"Courier New",monospace;line-height:1.8;overflow-x:auto;}
+.signer-block{background:#fff;border:1px solid #ccc;padding:8px 10px;margin-bottom:6px;}
+.signer-block.c0{border-left:3px solid #4a6fa5;}
+.signer-block.c1{border-left:3px solid #c05010;}
+.signer-block.c2{border-left:3px solid #208020;}
+.signer-block.c3{border-left:3px solid #805020;}
+.stitle{font-weight:bold;margin-bottom:6px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.stitle.c0{color:#1a3a6a !important;}.stitle.c1{color:#8a3008 !important;}
+.stitle.c2{color:#105010 !important;}.stitle.c3{color:#604010 !important;}
+.srow{display:grid;grid-template-columns:110px 1fr;gap:4px;align-items:center;margin-bottom:4px;}
+.note-sm{font-size:8pt;color:#666 !important;padding-left:114px;margin-top:2px;}
+.order-badge{font-size:8pt;padding:1px 6px;background:#d0dcf0;border:1px solid #7a9fd5;color:#1a3a6a !important;}
+.flow-bar{display:flex;align-items:center;gap:0;margin-bottom:10px;flex-wrap:wrap;gap:2px;}
+.flow-step{padding:3px 10px;font-size:9pt;background:#d0dcf0;border:1px solid #7a9fd5;color:#1a3a6a !important;}
+.flow-step.done{background:#e0f4e0;border-color:#5aaa5a;color:#1a6a1a !important;}
+.flow-step.active{background:#4a6fa5;color:#fff !important;font-weight:bold;}
+.flow-arrow{font-size:9pt;color:#888 !important;padding:0 2px;}
+.acode{background:#1e1e1e;padding:8px;font-size:8pt;font-family:"Courier New",monospace;line-height:1.8;overflow-x:auto;max-height:200px;overflow-y:auto;}
 .acode,.acode *{color:#d4d4d4 !important;}
 .acode .k{color:#9cdcfe !important;}.acode .v{color:#ce9178 !important;}.acode .n{color:#b5cea8 !important;}.acode .c{color:#6a9955 !important;}.acode .ok{color:#4ec9b0 !important;font-weight:bold;}
 .bbar{background:#f0f0f0;border-top:1px solid #bbb;padding:5px 10px;display:flex;gap:6px;justify-content:flex-end;}
 .rarea{flex:1;background:#888;overflow-y:auto;padding:8px;}
-.rbox{background:#f0f0f0;border:1px solid #aaa;padding:12px;width:530px;margin:0 auto;}
+.rbox{background:#f0f0f0;border:1px solid #aaa;padding:12px;width:580px;margin:0 auto;}
 .rok{background:#e0f4e0;border:1px solid #5aaa5a;padding:6px;text-align:center;font-size:11pt;font-weight:bold;color:#1a6a1a !important;margin-bottom:10px;}
 .rt{width:100%;border-collapse:collapse;}
 .rt th{background:#4a6fa5;padding:3px 8px;text-align:left;font-weight:normal;}
 .rt th,.rt th *{color:#fff !important;}
-.rt td{padding:3px 8px;border-bottom:1px solid #ddd;background:#fff;}
-.rt td:first-child{background:#f0f0f0;width:120px;}
-.tp{font-size:8pt;padding:0 5px;background:#fff8d0;border:1px solid #d4b800;color:#8a6000 !important;}
-.td{font-size:8pt;padding:0 5px;background:#e0f4e0;border:1px solid #5aaa5a;color:#1a6a1a !important;}
+.rt td{padding:4px 8px;border-bottom:1px solid #ddd;background:#fff;}
+.rt td:first-child{background:#f0f0f0;width:110px;}
 .warn{background:#fff3cd;border:1px solid #ffc107;padding:4px 10px;font-size:9pt;color:#856404 !important;margin-top:4px;display:none;}
+.loading-wrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:#f0f0f0;}
+.spinner{width:30px;height:30px;border:3px solid #ccc;border-top-color:#4a6fa5;border-radius:50%;animation:spin 0.8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
 </style>
 
 <div class="win">
@@ -78,51 +86,35 @@ input[type=text]{height:24px;border:1px solid #999;background:#fff !important;co
   </div>
   <div class="tb">
     <span>類別：</span>
-    <select style="width:78px;"><option>同意書</option><option>說明書</option></select>
+    <select style="width:78px;"><option>同意書</option></select>
     <span style="margin-left:4px;">搜尋範本名稱</span>
     <input type="text" style="width:110px;">
     <button>搜尋</button>
     <div class="sep"></div>
-    <button>＋ 新增</button>
-    <button>✕ 刪除</button>
-    <button>💾 存檔</button>
-    <button>↩ 復原</button>
+    <button>＋ 新增</button><button>✕ 刪除</button><button>💾 存檔</button><button>↩ 復原</button>
   </div>
 
   <div class="layout">
     <div class="sb">
       <div class="sbhd"><span>範本代碼</span><span>範本名稱</span></div>
-      <div class="sbi"><span>AA</span><span>AAA</span></div>
-      <div class="sbi"><span>ANES001</span><span>羅東博愛麻醉同意書</span></div>
-      <div class="sbi"><span>ANES002</span><span>手術後疼痛控制說明</span></div>
-      <div class="sbi"><span>ANES003</span><span>分娩減痛藥物說明</span></div>
-      <div class="sbi"><span>ANES004</span><span>硬脊膜外腔麻醉說明</span></div>
-      <div class="sbi"><span>ANES005</span><span>肌肉消阻斷術說明</span></div>
+      <div class="sbi" onclick="setTmpl('CRS004',this)"><span>CRS004</span><span>乙狀結腸鏡檢查同意書</span></div>
+      <div class="sbi on" onclick="setTmpl('ANES001',this)"><span>ANES001</span><span>羅東博愛麻醉同意書</span></div>
+      <div class="sbi" onclick="setTmpl('CS001',this)"><span>CS001</span><span>肺切除手術同意書</span></div>
       <div class="sbi"><span>BLOD001</span><span>緊急輸血同意書</span></div>
-      <div class="sbi"><span>BLOD002</span><span>自體捐血同意書</span></div>
-      <div class="sbi"><span>CM001</span><span>胸腔積液同意書</span></div>
-      <div class="sbi on"><span>CRS004</span><span>乙狀結腸鏡檢查同意書</span></div>
-      <div class="sbi"><span>CS001</span><span>肺切除手術同意書</span></div>
-      <div class="sbi"><span>CS002</span><span>胸腔鏡點肺手術同意書</span></div>
       <div class="sbi"><span>XRAY066</span><span>放射線治療同意書</span></div>
-      <div class="sbi"><span>CV001</span><span>心導管檢查同意書</span></div>
     </div>
 
     <div class="main">
       <div class="ibar">
-        <span>範本代碼</span>
-        <input type="text" style="width:66px;" value="CRS004" readonly>
-        <span>範本名稱</span>
-        <input type="text" style="width:148px;" value="乙狀結腸鏡檢查同意書" readonly>
-        <span>醫師代碼</span>
-        <input type="text" style="width:56px;" value="123023" readonly>
+        <span>範本代碼</span><input type="text" style="width:66px;" id="tmplCode" value="ANES001" readonly>
+        <span>範本名稱</span><input type="text" style="width:160px;" id="tmplName" value="羅東博愛麻醉同意書" readonly>
+        <span>醫師代碼</span><input type="text" style="width:56px;" value="123023" readonly>
       </div>
       <div class="ibar">
         <span>異動者</span><span>123023</span>
         <span>異動時間</span><span>2024-12-04 16:48</span>
         <button>附件</button>
-        <span>列印份數</span>
-        <input type="text" style="width:26px;" value="2">
+        <span>列印份數</span><input type="text" style="width:26px;" value="2">
       </div>
       <div class="ibar">
         <span>病患資料：</span>
@@ -135,153 +127,333 @@ input[type=text]{height:24px;border:1px solid #999;background:#fff !important;co
         <input type="checkbox"><span style="margin-left:3px;">測試資料</span>
         <button style="margin-left:4px;">🖨 預覽 ▼</button>
         <div class="sep"></div>
-        <button onclick="alert('在游標位置插入標記語法')">📌 插入標記</button>
-        <button id="sendBtn" onclick="goCf()" style="font-weight:bold;">▶ 送出簽署任務</button>
+        <button>📌 插入標記</button>
+        <button onclick="goConfirm()" style="font-weight:bold;">▶ 送出簽署任務</button>
       </div>
       <div id="warnMsg" class="warn">請先選擇病患資料後再送出任務。</div>
       <div class="patbar">
         <span>已選病患：</span><span id="pN" class="pe">（尚未選擇）</span>
         <span>病歷號：</span><span id="pM" class="pe">—</span>
         <span>主治醫師：</span><span id="pD" class="pe">—</span>
-        <span>科別：</span><span id="pDp" class="pe">—</span>
       </div>
 
+      <!-- S1 文件預覽 -->
       <div class="sc on" id="s1">
         <div class="docarea">
           <div class="paper">
-            <div class="ptitle">羅東博愛醫院<br>乙狀結腸鏡檢查同意書</div>
-            <div style="text-align:center;font-size:8pt;margin-bottom:4px;">CRS004 v3.0　依衛生主管機關規定</div>
+            <div class="ptitle" id="docTitle">羅東博愛醫院<br>麻醉同意書</div>
+            <div style="text-align:center;font-size:8pt;margin-bottom:4px;" id="docCode">ANES001 v2.0</div>
             <hr class="phr">
-            <div>病患姓名：<span class="mk" id="m1">${Textfield,patient_name,signer2,100}</span>　病歷號：<span class="mk" id="m2">${Textfield,med_no,signer2,80}</span></div>
-            <div>主治醫師：<span class="mk" id="m3">${Textfield,doctor_name,signer1,80}</span>　科別：<span class="mk" id="m4">${Textfield,dept,signer1,60}</span></div>
-            <div>檢查日期：<span class="mk">${Datefield,exam_date,signer1,90}</span></div>
+            <div id="docBody">
+              <div>病患姓名：<span class="mk">${Textfield,patient_name,signer2,100}</span>　病歷號：<span class="mk">${Textfield,med_no,signer2,80}</span></div>
+              <div>主治醫師：<span class="mk">${Textfield,doctor_name,signer1,80}</span></div>
+              <div>麻醉科醫師：<span class="mk">${Textfield,anes_doctor,signer3,80}</span></div>
+              <div>手術日期：<span class="mk">${Datefield,op_date,signer1,90}</span></div>
+            </div>
             <hr class="phr">
-            <div style="font-weight:bold;">一、醫師告知事項</div>
-            <div style="font-size:8pt;line-height:1.8;">醫師已向患者說明本項檢查之目的、步驟及可能之風險，包含：腸穿孔、出血、麻醉相關風險等併發症之可能性。</div>
+            <div style="font-weight:bold;">一、麻醉說明</div>
+            <div style="font-size:8pt;line-height:1.8;">麻醉科醫師已說明麻醉方式、風險及注意事項。</div>
             <div style="font-weight:bold;margin-top:4px;">二、病患聲明</div>
-            <div style="font-size:8pt;line-height:1.8;">本人已充分了解上述說明，同意進行乙狀結腸鏡檢查，並授權醫療團隊執行必要處置。</div>
-            <div style="margin-top:12px;">■ 主治醫師簽名：<span class="mk">${Signature,doctor_sign,signer1,70}</span></div>
-            <div>■ 病患／家屬簽名：<span class="mk">${Signature,patient_sign,signer2,70}</span></div>
-            <div>■ 系統時間：<span class="mk">${Systemtime,sign_time,signer1,110}</span></div>
+            <div style="font-size:8pt;line-height:1.8;">本人已充分了解，同意接受麻醉。</div>
+            <div style="margin-top:10px;">
+              <div>主治醫師：<span class="mk">${Signature,doctor_sign,signer1,70}</span></div>
+              <div>麻醉科醫師：<span class="mk">${Signature,anes_sign,signer3,70}</span></div>
+              <div>病患／家屬：<span class="mk">${Signature,patient_sign,signer2,70}</span></div>
+              <div>家屬見證：<span class="mk">${Signature,family_sign,signer4,70}</span></div>
+              <div>系統時間：<span class="mk">${Systemtime,sign_time,signer1,110}</span></div>
+            </div>
           </div>
         </div>
         <div class="stbar">
-          <span id="st">就緒｜識別到 7 個標記欄位｜請選擇病患後點「送出簽署任務」</span>
+          <span id="stTxt">就緒｜請選擇病患後點「送出簽署任務」</span>
           <span>287744 KB</span><span>GC</span>
         </div>
       </div>
 
+      <!-- S2 確認簽署者（送出前） -->
       <div class="sc" id="s2">
         <div class="carea">
           <div class="cbox">
-            <div class="ctitle">送出簽署任務 — 確認資料</div>
-            <div class="cnote">系統已從 HIS 資料庫自動帶入以下資料。確認後系統將產製 PDF 並透過 API 一次完成「建立任務＋預填資料」。</div>
+            <div class="ctitle">送出簽署任務 — 確認簽署者</div>
+            <div class="flow-bar">
+              <span class="flow-step active">① HIS 確認簽署者身份</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-step">② 打點點簽 API</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-step">③ 點點簽解析欄位＋回傳連結</span>
+            </div>
+            <div class="cnote">
+              請先確認每個 signer 對應的實際人員與信箱，確認後 HIS 將一次打 API 給點點簽，由點點簽完成解析欄位並回傳各簽署者的專屬連結。
+            </div>
+
+            <div class="shd">任務基本設定</div>
+            <div class="frow"><span>任務名稱</span><input type="text" class="fi" id="taskName"></div>
+            <div class="frow">
+              <span>簽署模式</span>
+              <select class="fi" id="modeSelect" onchange="renderSigners()">
+                <option value="seq">有序（依 signer 編號順序）</option>
+                <option value="par">無序（同時簽署）</option>
+              </select>
+            </div>
+
             <div class="shd">病患資料 <span class="bg-a">HIS 自動帶入</span></div>
             <div class="frow"><span>病患姓名</span><input type="text" class="fi ro" readonly id="c1"></div>
             <div class="frow"><span>病歷號</span><input type="text" class="fi ro" readonly id="c2"></div>
             <div class="frow"><span>主治醫師</span><input type="text" class="fi ro" readonly id="c3"></div>
-            <div class="frow"><span>科別</span><input type="text" class="fi ro" readonly id="c4"></div>
-            <div class="shd">需人工確認</div>
-            <div class="frow"><span>檢查日期</span><input type="text" class="fi" value="2026/04/10"></div>
-            <div class="frow"><span>識別方式 <span class="bg-t">待確認</span></span>
-              <select class="fi"><option>就醫序號（待確認）</option></select></div>
-            <div class="shd">簽署設定</div>
-            <div class="frow"><span>簽署模式</span>
-              <select class="fi"><option>有序（醫護先 → 病患後）</option><option>無序（同時簽署）</option></select></div>
-            <div class="frow"><span>病患通知方式</span>
-              <select class="fi"><option>臨櫃簽署</option><option>SMS 簡訊</option><option>Email</option></select></div>
-            <div class="shd">API 請求預覽（系統背景執行）</div>
-            <div class="acode">
-<span class="c">// POST /api/v1/tasks</span>
-{ <span class="k">"task_type"</span>: <span class="v">"sequential"</span>,
-  <span class="k">"signers"</span>: [{ <span class="k">"signer_id"</span>: <span class="v">"signer1"</span>, <span class="k">"name"</span>: <span class="v" id="a1">"—"</span> },
-               { <span class="k">"signer_id"</span>: <span class="v">"signer2"</span>, <span class="k">"name"</span>: <span class="v" id="a2">"—"</span> }],
-  <span class="k">"prefill_data"</span>: [
-    { <span class="k">"field_id"</span>: <span class="v">"patient_name"</span>, <span class="k">"value"</span>: <span class="v" id="a3">"—"</span> }, <span class="c">← 自動</span>
-    { <span class="k">"field_id"</span>: <span class="v">"med_no"</span>,       <span class="k">"value"</span>: <span class="v" id="a4">"—"</span> }, <span class="c">← 自動</span>
-    { <span class="k">"field_id"</span>: <span class="v">"doctor_name"</span>,  <span class="k">"value"</span>: <span class="v" id="a5">"—"</span> }, <span class="c">← 自動</span>
-    { <span class="k">"field_id"</span>: <span class="v">"dept"</span>,         <span class="k">"value"</span>: <span class="v" id="a6">"—"</span> }, <span class="c">← 自動</span>
-    { <span class="k">"field_id"</span>: <span class="v">"exam_date"</span>,    <span class="k">"value"</span>: <span class="v">"2026/04/10"</span> } <span class="c">← 人工</span>
-  ]}</div>
+
+            <div class="shd" id="signerShdTitle">簽署者指定</div>
+            <div id="signerBlocks"></div>
+
+            <div class="shd">API 請求預覽（確認後一次送出給點點簽）</div>
+            <div class="acode" id="apiPrev"></div>
           </div>
         </div>
         <div class="bbar">
           <button onclick="sh('s1')">← 返回</button>
-          <button onclick="sh('s3')" style="font-weight:bold;">確認送出 →</button>
+          <button onclick="doSendApi()" style="font-weight:bold;">確認，送出給點點簽 →</button>
         </div>
       </div>
 
+      <!-- S3 loading -->
       <div class="sc" id="s3">
+        <div class="loading-wrap">
+          <div class="spinner"></div>
+          <div style="font-size:10pt;color:#555 !important;">HIS 正在呼叫點點簽 API...</div>
+          <div style="font-size:9pt;color:#888 !important;" id="loadingStep">送出 PDF 與簽署者資料</div>
+        </div>
+      </div>
+
+      <!-- S4 完成 -->
+      <div class="sc" id="s4">
         <div class="rarea">
           <div class="rbox">
-            <div class="rok">✓ 任務建立成功，已發送至簽署者</div>
-            <table class="rt">
-              <tr><th colspan="2">任務資訊</th></tr>
-              <tr><td>task_id</td><td style="font-family:monospace;font-size:8pt;">task_CRS004_20260406_001</td></tr>
-              <tr><td>文件</td><td>乙狀結腸鏡檢查同意書（CRS004）</td></tr>
-              <tr><td>病患</td><td id="rp">—</td></tr>
-              <tr><td>目前狀態</td><td><span class="tp">等待 signer1（醫護）簽署</span></td></tr>
-              <tr><th colspan="2">欄位狀態</th></tr>
-              <tr><td>自動預填</td><td><span class="td">patient_name / med_no / doctor_name / dept</span></td></tr>
-              <tr><td>人工確認</td><td><span class="td">exam_date：2026/04/10</span></td></tr>
-              <tr><td>等待簽署</td><td><span class="tp">doctor_sign / patient_sign</span></td></tr>
-              <tr><td>系統自動</td><td><span class="tp">sign_time（簽署當下填入）</span></td></tr>
-            </table>
-            <div class="acode" style="margin-top:8px;"><span class="ok">← 200 OK</span>
-{ <span class="k">"task_id"</span>: <span class="v">"task_CRS004_20260406_001"</span>, <span class="k">"status"</span>: <span class="v">"pending_sign"</span>, <span class="k">"parsed_fields"</span>: <span class="n">7</span>, <span class="k">"prefilled"</span>: <span class="n">5</span> }</div>
+            <div class="rok">✓ 完成，點點簽已解析欄位並回傳各簽署者連結</div>
+            <div class="flow-bar" style="margin-bottom:10px;">
+              <span class="flow-step done">① HIS 確認簽署者身份</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-step done">② 打點點簽 API</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-step done">③ 點點簽解析欄位＋回傳連結</span>
+            </div>
+            <table class="rt" id="resultTable"></table>
+            <div class="acode" style="margin-top:10px;" id="responseCode"></div>
           </div>
         </div>
         <div class="bbar"><button onclick="rst()" style="font-weight:bold;">完成，返回文件</button></div>
       </div>
+
     </div>
   </div>
 </div>
 
 <script>
-const DB={P001:{name:'李小華',med:'MR-20240815',doc:'陳大文',dept:'外科'},P002:{name:'王大明',med:'MR-20231102',doc:'林淑芬',dept:'內科'}};
+const DB={
+  P001:{name:'李小華',med:'MR-20240815',doc:'陳大文',dept:'外科',email:'patient_MR20240815@his.hospital.com.tw'},
+  P002:{name:'王大明',med:'MR-20231102',doc:'林淑芬',dept:'內科',email:'patient_MR20231102@his.hospital.com.tw'}
+};
+const staffList=[
+  {val:'陳大文|醫師',email:'chen.dawen@hospital.com.tw',label:'陳大文　醫師（外科）'},
+  {val:'王志明|醫師',email:'wang.zhiming@hospital.com.tw',label:'王志明　醫師（外科）'},
+  {val:'黃建國|醫師',email:'huang.jianguo@hospital.com.tw',label:'黃建國　醫師（麻醉科）'},
+  {val:'林淑芬|護理師',email:'lin.shufen@hospital.com.tw',label:'林淑芬　護理師'},
+  {val:'張雅婷|護理師',email:'chang.yating@hospital.com.tw',label:'張雅婷　護理師'},
+];
+const templates={
+  ANES001:{code:'ANES001',name:'羅東博愛麻醉同意書',
+    signers:[
+      {id:'signer1',role:'醫護人員',source:'staff',hint:'主治醫師'},
+      {id:'signer2',role:'病患',source:'patient',hint:'病患'},
+      {id:'signer3',role:'醫護人員',source:'staff',hint:'麻醉科醫師'},
+      {id:'signer4',role:'家屬',source:'family',hint:'家屬見證'},
+    ]},
+  CRS004:{code:'CRS004',name:'乙狀結腸鏡檢查同意書',
+    signers:[
+      {id:'signer1',role:'醫護人員',source:'staff',hint:'主治醫師'},
+      {id:'signer2',role:'病患',source:'patient',hint:'病患'},
+    ]},
+  CS001:{code:'CS001',name:'肺切除手術同意書',
+    signers:[
+      {id:'signer1',role:'醫護人員',source:'staff',hint:'主治醫師'},
+      {id:'signer2',role:'醫護人員',source:'staff',hint:'護理師見證'},
+      {id:'signer3',role:'病患',source:'patient',hint:'病患'},
+      {id:'signer4',role:'家屬',source:'family',hint:'家屬／法代'},
+    ]},
+};
+const colors=['c0','c1','c2','c3'];
+let curP=null, curTmpl=templates.ANES001;
+
+function setTmpl(code,el){
+  curTmpl=templates[code]||templates.ANES001;
+  document.getElementById('tmplCode').value=curTmpl.code;
+  document.getElementById('tmplName').value=curTmpl.name;
+  document.querySelectorAll('.sbi').forEach(e=>e.classList.remove('on'));
+  if(el)el.classList.add('on');
+}
+
 function onP(){
   const v=document.getElementById('ps').value;
-  const w=document.getElementById('warnMsg');
-  w.style.display='none';
-  if(!v){
-    ['pN','pM','pD','pDp'].forEach(id=>{const e=document.getElementById(id);e.className='pe';});
-    document.getElementById('pN').textContent='（尚未選擇）';
-    document.getElementById('pM').textContent='—';
-    document.getElementById('pD').textContent='—';
-    document.getElementById('pDp').textContent='—';
-    const rv={m1:'${Textfield,patient_name,signer2,100}',m2:'${Textfield,med_no,signer2,80}',m3:'${Textfield,doctor_name,signer1,80}',m4:'${Textfield,dept,signer1,60}'};
-    Object.entries(rv).forEach(([id,val])=>{const e=document.getElementById(id);e.textContent=val;e.className='mk';});
-    document.getElementById('st').textContent='就緒｜識別到 7 個標記欄位｜請選擇病患後點「送出簽署任務」';
-    return;
-  }
-  const p=DB[v];
-  function sv(id,t){const e=document.getElementById(id);e.textContent=t;e.className='pv';}
-  sv('pN',p.name);sv('pM',p.med);sv('pD',p.doc);sv('pDp',p.dept);
-  function mk(id,t){const e=document.getElementById(id);e.textContent=t;e.className='mk ok';}
-  mk('m1',p.name);mk('m2',p.med);mk('m3',p.doc);mk('m4',p.dept);
-  document.getElementById('st').textContent='已選病患：'+p.name+'（'+p.med+'）｜可點「送出簽署任務」';
-}
-function goCf(){
-  const v=document.getElementById('ps').value;
-  if(!v){
-    const w=document.getElementById('warnMsg');
-    w.style.display='block';
-    return;
-  }
   document.getElementById('warnMsg').style.display='none';
-  const p=DB[v];
-  document.getElementById('c1').value=p.name;document.getElementById('c2').value=p.med;
-  document.getElementById('c3').value=p.doc;document.getElementById('c4').value=p.dept;
-  document.getElementById('a1').textContent='"'+p.doc+'"';document.getElementById('a2').textContent='"'+p.name+'"';
-  document.getElementById('a3').textContent='"'+p.name+'"';document.getElementById('a4').textContent='"'+p.med+'"';
-  document.getElementById('a5').textContent='"'+p.doc+'"';document.getElementById('a6').textContent='"'+p.dept+'"';
-  document.getElementById('rp').textContent=p.name+'（'+p.med+'）';
+  if(!v){curP=null;
+    document.getElementById('pN').textContent='（尚未選擇）';document.getElementById('pN').className='pe';
+    document.getElementById('pM').textContent='—';document.getElementById('pM').className='pe';
+    document.getElementById('pD').textContent='—';document.getElementById('pD').className='pe';
+    return;
+  }
+  curP=DB[v];
+  function sv(id,t){const e=document.getElementById(id);e.textContent=t;e.className='pv';}
+  sv('pN',curP.name);sv('pM',curP.med);sv('pD',curP.doc);
+  document.getElementById('stTxt').textContent='已選病患：'+curP.name+'｜可點「送出簽署任務」';
+}
+
+function goConfirm(){
+  if(!curP){document.getElementById('warnMsg').style.display='block';return;}
+  document.getElementById('warnMsg').style.display='none';
+  document.getElementById('c1').value=curP.name;
+  document.getElementById('c2').value=curP.med;
+  document.getElementById('c3').value=curP.doc;
+  document.getElementById('taskName').value=curP.name+'_'+curTmpl.name+'_20260410';
+  document.getElementById('signerShdTitle').textContent='簽署者指定（共 '+curTmpl.signers.length+' 位，依範本標記定義）';
+  renderSigners();
   sh('s2');
 }
-function sh(id){['s1','s2','s3'].forEach(s=>{document.getElementById(s).className='sc'+(s===id?' on':'');});}
-function rst(){
-  document.getElementById('ps').value='';
-  onP();
-  sh('s1');
+
+function renderSigners(){
+  const signers=curTmpl.signers;
+  const isSeq=document.getElementById('modeSelect').value==='seq';
+  let html='';
+  signers.forEach((s,i)=>{
+    const col=colors[i%4];
+    const orderTxt=isSeq?'第 '+(i+1)+' 順位簽署':'同時簽署';
+    const badge=`<span class="order-badge">${orderTxt}</span>`;
+    if(s.source==='staff'){
+      const opts=staffList.map(st=>`<option value="${st.val}">${st.label}</option>`).join('');
+      html+=`<div class="signer-block ${col}">
+        <div class="stitle ${col}">${s.id}　<span class="bg-t">${s.hint}</span> ${badge}</div>
+        <div class="srow"><span>指定人員</span>
+          <select class="fi" id="sel_${s.id}" onchange="onStaffCh('${s.id}')">${opts}</select>
+        </div>
+        <div class="srow"><span>信箱</span><input type="text" class="fi ro" readonly id="email_${s.id}"></div>
+        <div class="note-sm">信箱由 HIS 人員帳號帶入，不可修改。</div>
+      </div>`;
+    } else if(s.source==='patient'){
+      html+=`<div class="signer-block ${col}">
+        <div class="stitle ${col}">${s.id}　<span class="bg-t">${s.hint}</span> ${badge}</div>
+        <div class="srow"><span>姓名</span><input type="text" class="fi ro" readonly value="${curP.name}"></div>
+        <div class="srow"><span>信箱</span><input type="text" class="fi ro" readonly value="${curP.email}"></div>
+        <div class="note-sm">由 HIS 病患資料自動帶入，不可修改。</div>
+      </div>`;
+    } else {
+      html+=`<div class="signer-block ${col}">
+        <div class="stitle ${col}">${s.id}　<span class="bg-t">${s.hint}</span> ${badge}</div>
+        <div class="srow"><span>姓名</span>
+          <input type="text" class="fi" id="fname_${s.id}" placeholder="請輸入家屬姓名" oninput="updateApi()">
+        </div>
+        <div class="srow"><span>信箱</span>
+          <input type="text" class="fi" id="femail_${s.id}" placeholder="請輸入家屬信箱" oninput="updateApi()">
+        </div>
+        <div class="note-sm">家屬資料需手動輸入。</div>
+      </div>`;
+    }
+  });
+  document.getElementById('signerBlocks').innerHTML=html;
+  curTmpl.signers.forEach(s=>{
+    if(s.source==='staff') onStaffCh(s.id);
+  });
+  updateApi();
 }
+
+function onStaffCh(sid){
+  const sel=document.getElementById('sel_'+sid);
+  if(!sel)return;
+  const found=staffList.find(st=>st.val===sel.value);
+  if(found) document.getElementById('email_'+sid).value=found.email;
+  updateApi();
+}
+
+function updateApi(){
+  const signers=curTmpl.signers;
+  const isSeq=document.getElementById('modeSelect').value==='seq';
+  const taskName=document.getElementById('taskName')?document.getElementById('taskName').value:'';
+  let signerLines=signers.map((s,i)=>{
+    let name='',email='',role=s.role;
+    if(s.source==='staff'){
+      const sel=document.getElementById('sel_'+s.id);
+      const k=sel?sel.value:'';const pts=k.split('|');
+      name=pts[0]||'';role=pts[1]||'醫護';
+      const f=staffList.find(st=>st.val===k);email=f?f.email:'';
+    } else if(s.source==='patient'){
+      name=curP?curP.name:'';email=curP?curP.email:'';role='病患';
+    } else {
+      const ni=document.getElementById('fname_'+s.id);
+      const ei=document.getElementById('femail_'+s.id);
+      name=ni?ni.value:'';email=ei?ei.value:'';role='家屬';
+    }
+    const order=isSeq?(i+1):'null';
+    return `    { <span class="k">"signer_id"</span>: <span class="v">"${s.id}"</span>, <span class="k">"name"</span>: <span class="v">"${name}"</span>, <span class="k">"role"</span>: <span class="v">"${role}"</span>,\n      <span class="k">"email"</span>: <span class="v">"${email}"</span>, <span class="k">"order"</span>: <span class="n">${order}</span> }`;
+  }).join(',\n');
+
+  const el=document.getElementById('apiPrev');
+  if(!el)return;
+  el.innerHTML=
+`<span class="c">// POST /api/v1/tasks　— HIS 一次送出，點點簽完成所有處理</span>
+{
+  <span class="k">"task_name"</span>: <span class="v">"${taskName}"</span>,
+  <span class="k">"task_type"</span>: <span class="v">"${isSeq?'sequential':'parallel'}"</span>,
+  <span class="k">"signers"</span>: [
+${signerLines}
+  ],
+  <span class="k">"prefill_data"</span>: [
+    { <span class="k">"field_id"</span>: <span class="v">"patient_name"</span>, <span class="k">"value"</span>: <span class="v">"${curP?curP.name:''}"</span> },
+    { <span class="k">"field_id"</span>: <span class="v">"med_no"</span>,       <span class="k">"value"</span>: <span class="v">"${curP?curP.med:''}"</span> },
+    { <span class="k">"field_id"</span>: <span class="v">"doctor_name"</span>,  <span class="k">"value"</span>: <span class="v">"${curP?curP.doc:''}"</span> }
+  ]
+}`;
+}
+
+function doSendApi(){
+  sh('s3');
+  const steps=['送出 PDF 與簽署者資料至點點簽','點點簽解析 PDF 標記中...','自動建立各 signer 簽署欄位...','產生專屬簽署連結'];
+  let i=0;
+  const el=document.getElementById('loadingStep');
+  const iv=setInterval(()=>{
+    if(i<steps.length){el.textContent=steps[i++];}
+    else{clearInterval(iv);buildResult();sh('s4');}
+  },600);
+}
+
+function buildResult(){
+  const signers=curTmpl.signers;
+  const isSeq=document.getElementById('modeSelect').value==='seq';
+  const taskName=document.getElementById('taskName').value;
+  const urls=['abc123','def456','ghi789','jkl012'];
+  let rows=`<tr><th colspan="2">任務資訊</th></tr>
+  <tr><td>任務名稱</td><td style="font-weight:bold;">${taskName}</td></tr>
+  <tr><td>task_id</td><td style="font-family:monospace;font-size:8pt;">task_${curTmpl.code}_20260406_001</td></tr>
+  <tr><td>文件</td><td>${curTmpl.name}</td></tr>
+  <tr><td>病患</td><td>${curP?curP.name:'—'}（${curP?curP.med:'—'}）</td></tr>
+  <tr><td>簽署模式</td><td>${isSeq?'有序':'無序'}</td></tr>
+  <tr><th colspan="2">各簽署者專屬連結（點點簽回傳）</th></tr>`;
+  signers.forEach((s,i)=>{
+    let name='',role='';
+    if(s.source==='staff'){const sel=document.getElementById('sel_'+s.id);const k=sel?sel.value.split('|'):['—',''];name=k[0];role=k[1];}
+    else if(s.source==='patient'){name=curP?curP.name:'—';role='病患';}
+    else{const ni=document.getElementById('fname_'+s.id);name=ni&&ni.value?ni.value:'（未填）';role='家屬';}
+    rows+=`<tr><td>${s.id}<br><span style="font-size:8pt;">${name}　${role}</span></td>
+    <td style="font-size:8pt;font-family:monospace;color:#1a3a6a !important;">https://sign.dotdotsign.com/s/${urls[i]}</td></tr>`;
+  });
+  document.getElementById('resultTable').innerHTML=rows;
+
+  document.getElementById('responseCode').innerHTML=
+`<span class="ok">← 200 OK　點點簽回傳</span>
+{
+  <span class="k">"task_id"</span>: <span class="v">"task_${curTmpl.code}_20260406_001"</span>,
+  <span class="k">"status"</span>:   <span class="v">"pending_sign"</span>,
+  <span class="k">"sign_urls"</span>: {
+${signers.map((s,i)=>`    <span class="k">"${s.id}"</span>: <span class="v">"https://sign.dotdotsign.com/s/${urls[i]}"</span>`).join(',\n')}
+  }
+}`;
+}
+
+function sh(id){['s1','s2','s3','s4'].forEach(s=>{document.getElementById(s).className='sc'+(s===id?' on':'');});}
+function rst(){document.getElementById('ps').value='';curP=null;onP();sh('s1');}
 </script>

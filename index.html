@@ -1,110 +1,114 @@
-
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DottedSign 文件範本 Demo</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  .app { background: #f0f0f0; min-height: 600px; display: flex; flex-direction: column; border-radius: var(--border-radius-lg); overflow: hidden; border: 0.5px solid var(--color-border-tertiary); }
-  .topbar { background: #fff; border-bottom: 0.5px solid #e8e8e8; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; height: 52px; }
+  html, body { width: 100%; height: 100%; font-family: -apple-system, BlinkMacSystemFont, 'PingFang TC', 'Noto Sans TC', sans-serif; }
+
+  .app { background: #f0f0f0; min-height: 100vh; width: 100%; display: flex; flex-direction: column; }
+  .topbar { background: #fff; border-bottom: 0.5px solid #e8e8e8; display: flex; align-items: center; justify-content: space-between; padding: 0 28px; height: 56px; flex-shrink: 0; }
   .topbar-left { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 500; color: #000; }
   .topbar-right { display: flex; gap: 10px; }
-  .main-layout { display: flex; flex: 1; }
-  .sidebar { width: 220px; background: #fff; border-right: 0.5px solid #e8e8e8; flex-shrink: 0; display: flex; flex-direction: column; }
+  .main-layout { display: flex; flex: 1; min-height: 0; }
+  .sidebar { width: 240px; background: #fff; border-right: 0.5px solid #e8e8e8; flex-shrink: 0; display: flex; flex-direction: column; }
   .sidebar-group { border-bottom: 0.5px solid #e8e8e8; }
-  .sidebar-group-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; font-size: 13px; color: #000; }
+  .sidebar-group-header { display: flex; align-items: center; justify-content: space-between; padding: 11px 18px; font-size: 13px; color: #000; }
   .sidebar-group-header a { color: #5856D6; font-size: 13px; text-decoration: none; }
   .sidebar-group-header .label { display: flex; align-items: center; gap: 5px; }
-  .role-selector { margin: 10px 12px; background: #fff; border: 1px solid #d0d0d0; border-radius: 8px; padding: 8px 12px; display: flex; align-items: center; justify-content: space-between; }
+  .role-selector { margin: 10px 14px; background: #fff; border: 1px solid #d0d0d0; border-radius: 8px; padding: 8px 12px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
   .role-dot { width: 30px; height: 30px; border-radius: 50%; background: #1BBFE0; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .field-list { padding: 4px 0 8px; }
-  .field-item { display: flex; align-items: center; gap: 10px; padding: 7px 16px; font-size: 14px; color: #000; cursor: pointer; }
+  .field-item { display: flex; align-items: center; gap: 10px; padding: 8px 18px; font-size: 14px; color: #000; cursor: pointer; }
   .field-item:hover { background: #f5f5f5; }
   .field-icon { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .field-icon svg { width: 17px; height: 17px; }
-  .doc-area { flex: 1; display: flex; align-items: center; justify-content: center; padding: 24px; position: relative; background: #f0f0f0; }
-  .doc-paper { background: #fff; width: 100%; max-width: 680px; height: 460px; border: 0.5px solid #ddd; border-radius: 4px; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-  .sig-block { position: absolute; bottom: 90px; right: 60px; width: 220px; height: 60px; background: #D6F0F5; border: 1.5px dashed #87CEDC; border-radius: 4px; display: flex; align-items: center; justify-content: center; }
+  .doc-area { flex: 1; display: flex; align-items: center; justify-content: center; padding: 32px; position: relative; background: #f0f0f0; overflow: auto; }
+  .doc-paper { background: #fff; width: 100%; max-width: 860px; height: calc(100vh - 56px - 64px); min-height: 500px; border: 0.5px solid #ddd; border-radius: 4px; position: relative; box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
+  .sig-block { position: absolute; bottom: 120px; right: 80px; width: 240px; height: 66px; background: #D6F0F5; border: 1.5px dashed #87CEDC; border-radius: 4px; display: flex; align-items: center; justify-content: center; }
   .sig-label { font-size: 14px; color: #5BA0AC; }
   .sig-asterisk { position: absolute; top: 6px; right: 8px; color: #E06070; font-size: 14px; }
+
   .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 100; }
   .overlay.active { display: flex; }
-  .modal { background: #ffffff; border-radius: 12px; width: 420px; max-height: 92vh; overflow-y: auto; box-shadow: 0 8px 32px rgba(0,0,0,0.18); color-scheme: light; font-size: 12px; color: #000; }
-  .modal * { font-size: 12px; }
-  .modal-header { padding: 14px 20px 10px; position: relative; text-align: center; }
-  .modal-title { font-weight: 500; color: #000; }
-  .modal-close { position: absolute; top: 12px; left: 16px; background: none; border: none; cursor: pointer; color: #999; line-height: 1; padding: 0; }
-  .modal-section-header { background: #f5f5f5; padding: 8px 20px; font-weight: 500; color: #000; display: flex; align-items: center; gap: 6px; border-top: 0.5px solid #e8e8e8; border-bottom: 0.5px solid #e8e8e8; }
-  .modal-body { padding: 14px 20px 8px; background: #fff; }
-  .field-label { color: #000; margin-bottom: 6px; display: flex; align-items: center; gap: 5px; }
-  .role-box-single { border: 1px solid #e0e0e0; border-radius: 8px; display: flex; align-items: center; gap: 10px; padding: 9px 12px; background: #fff; }
-  .role-avatar { width: 28px; height: 28px; border-radius: 50%; background: #1BBFE0; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .manage-link { color: #5856D6; text-decoration: none; display: inline-block; margin-top: 8px; margin-bottom: 4px; }
-  .form-field { margin-bottom: 14px; }
-  .form-input { width: 100%; border: 1px solid #d0d0d0; border-radius: 8px; padding: 8px 12px; font-size: 12px !important; background-color: #ffffff !important; color: #000000 !important; outline: none; font-family: inherit; -webkit-text-fill-color: #000000; color-scheme: light; }
+  .modal { background: #ffffff; border-radius: 12px; width: 460px; max-height: 92vh; overflow-y: auto; box-shadow: 0 8px 32px rgba(0,0,0,0.18); color-scheme: light; color: #000; }
+  .modal-header { padding: 16px 22px 12px; position: relative; text-align: center; }
+  .modal-title { font-weight: 500; color: #000; font-size: 14px; }
+  .modal-close { position: absolute; top: 14px; left: 18px; background: none; border: none; cursor: pointer; color: #999; line-height: 1; padding: 0; font-size: 18px; }
+  .modal-section-header { background: #f5f5f5; padding: 9px 22px; font-weight: 500; color: #000; font-size: 12px; display: flex; align-items: center; gap: 6px; border-top: 0.5px solid #e8e8e8; border-bottom: 0.5px solid #e8e8e8; }
+  .modal-body { padding: 16px 22px 10px; background: #fff; }
+  .field-label { color: #000; font-size: 12px; margin-bottom: 6px; display: flex; align-items: center; gap: 5px; }
+  .role-box-single { border: 1px solid #e0e0e0; border-radius: 8px; display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: #fff; }
+  .role-avatar { width: 30px; height: 30px; border-radius: 50%; background: #1BBFE0; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .manage-link { color: #5856D6; font-size: 12px; text-decoration: none; display: inline-block; margin-top: 8px; margin-bottom: 4px; }
+  .form-field { margin-bottom: 16px; }
+  .form-field label { font-size: 12px; color: #000; display: flex; align-items: center; gap: 5px; margin-bottom: 6px; }
+  .form-input { width: 100%; border: 1px solid #d0d0d0; border-radius: 8px; padding: 9px 13px; font-size: 12px; background-color: #ffffff !important; color: #000000 !important; outline: none; font-family: inherit; -webkit-text-fill-color: #000000; color-scheme: light; }
   .form-input::placeholder { color: #bbb; -webkit-text-fill-color: #bbb; }
   .form-input:focus { border-color: #5856D6; box-shadow: 0 0 0 2px rgba(88,86,214,0.1); }
   .form-input.error { border-color: #E53535 !important; box-shadow: none !important; }
+  .form-select { width: 100%; border: 1px solid #d0d0d0; border-radius: 8px; padding: 9px 30px 9px 13px; font-size: 12px; background: #fff; color: #bbb; outline: none; font-family: inherit; appearance: none; -webkit-appearance: none; color-scheme: light; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; }
   .checkbox-row { display: flex; align-items: center; gap: 10px; margin-top: 4px; cursor: pointer; }
   .custom-check { width: 20px; height: 20px; border-radius: 5px; border: 1.5px solid #ccc; background: #fff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.15s, border-color 0.15s; }
   .custom-check.checked { background: #4A9EF5; border-color: #4A9EF5; }
   .custom-check svg { display: none; }
   .custom-check.checked svg { display: block; }
-  .checkbox-label { color: #000; user-select: none; }
+  .checkbox-label { font-size: 12px; color: #000; user-select: none; }
   .tooltip-wrap { position: relative; display: inline-flex; align-items: center; }
-  .tooltip-icon { width: 14px; height: 14px; border-radius: 50%; background: #bbb; color: #fff; font-weight: 600; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; user-select: none; font-size: 10px !important; }
-  .tooltip-box { display: none; position: absolute; left: 18px; top: -4px; background: #333; color: #fff; border-radius: 6px; padding: 6px 10px; z-index: 200; line-height: 1.5; width: 220px; white-space: normal; font-size: 12px !important; }
+  .tooltip-icon { width: 14px; height: 14px; border-radius: 50%; background: #bbb; color: #fff; font-size: 9px; font-weight: 600; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; user-select: none; }
+  .tooltip-box { display: none; position: absolute; left: 18px; top: -4px; background: #333; color: #fff; border-radius: 6px; padding: 6px 10px; z-index: 200; line-height: 1.5; width: 230px; white-space: normal; font-size: 12px; }
   .tooltip-wrap:hover .tooltip-box, .tooltip-wrap.active .tooltip-box { display: block; }
-  .input-footer { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-top: 4px; }
-  .error-msg { color: #E53535; line-height: 1.4; font-size: 12px !important; flex: 1; display: none; }
+  .error-msg { color: #E53535; line-height: 1.4; font-size: 12px; display: none; margin-top: 4px; }
   .error-msg.show { display: block; }
-  .char-hint { color: #aaa; font-size: 12px !important; white-space: nowrap; flex-shrink: 0; }
-  .modal-footer { padding: 10px 20px 14px; display: flex; justify-content: flex-end; gap: 10px; border-top: 0.5px solid #eee; background: #fff; align-items: center; }
-  .btn-cancel-modal { background: #fff; border: 1px solid #ccc; border-radius: 6px; padding: 6px 16px; cursor: pointer; color: #222; font-family: inherit; font-size: 12px !important; }
-  .btn-confirm-modal { background: #6C6FDE; border: none; border-radius: 10px; padding: 9px 28px; color: #fff; cursor: pointer; font-weight: 500; font-family: inherit; font-size: 12px !important; }
+  .modal-footer { padding: 12px 22px 16px; display: flex; justify-content: flex-end; gap: 10px; border-top: 0.5px solid #eee; background: #fff; align-items: center; }
+  .btn-cancel-modal { background: #fff; border: 1px solid #ccc; border-radius: 6px; padding: 7px 18px; cursor: pointer; color: #222; font-family: inherit; font-size: 12px; }
+  .btn-confirm-modal { background: #6C6FDE; border: none; border-radius: 10px; padding: 10px 30px; color: #fff; cursor: pointer; font-weight: 500; font-family: inherit; font-size: 12px; }
 
-  .success-toast { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); background: #34C759; color: white; border-radius: 8px; padding: 10px 20px; font-size: 13px; display: none; align-items: center; gap: 10px; white-space: nowrap; z-index: 50; }
+  .success-toast { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%); background: #34C759; color: white; border-radius: 8px; padding: 12px 24px; font-size: 14px; display: none; align-items: center; gap: 10px; white-space: nowrap; z-index: 200; }
   .success-toast.active { display: flex; }
-  .page { display: none; }
-  .page.active { display: flex; flex-direction: column; }
 
-  /* Template page */
-  .tpl-topbar { border-bottom: 0.5px solid #e8e8e8; padding: 0 24px; height: 52px; display: flex; align-items: center; background: #fff; }
-  .tpl-nav { display: flex; gap: 28px; margin-left: 32px; }
+  .page { display: none; }
+  .page.active { display: flex; flex-direction: column; min-height: 100vh; }
+
+  .tpl-topbar { border-bottom: 0.5px solid #e8e8e8; padding: 0 28px; height: 56px; display: flex; align-items: center; background: #fff; flex-shrink: 0; }
+  .tpl-nav { display: flex; gap: 32px; margin-left: 40px; }
   .tpl-nav a { font-size: 14px; text-decoration: none; color: #888; }
   .tpl-nav a.active { color: #000; font-weight: 500; }
-  .tpl-sidebar { width: 180px; border-right: 0.5px solid #e8e8e8; padding: 20px 0; flex-shrink: 0; }
-  .tpl-sidebar a { display: block; padding: 8px 20px; font-size: 14px; color: #888; text-decoration: none; }
+  .tpl-layout { display: flex; flex: 1; }
+  .tpl-sidebar { width: 200px; border-right: 0.5px solid #e8e8e8; padding: 24px 0; flex-shrink: 0; }
+  .tpl-sidebar a { display: block; padding: 9px 24px; font-size: 14px; color: #888; text-decoration: none; }
   .tpl-sidebar a.active { background: #f0f0ff; color: #5856D6; border-right: 2px solid #5856D6; font-weight: 500; }
 
-  /* Card */
   .tpl-card-wrap { display: flex; flex-direction: column; align-items: center; cursor: pointer; position: relative; }
-  .tpl-card { border: 0.5px solid #ddd; border-radius: 10px; width: 140px; height: 180px; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #fff; position: relative; transition: border-color 0.15s; }
-  .tpl-card.selected { border: 2px solid #4A9EF5; background: #EAF4FF; }
-  .tpl-card-thumb { width: 100%; height: 100%; position: relative; }
-  /* Grid paper look */
-  .tpl-card-grid { width: 100%; height: 100%; background-color: #ddeeff; background-image: linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 10px 10px; border-radius: 8px; }
-  .tpl-card-dots { position: absolute; top: 8px; right: 8px; display: flex; gap: 3px; cursor: pointer; z-index: 10; }
+  .tpl-card { border: 1px solid #ddd; border-radius: 10px; width: 160px; height: 210px; background: #fff; position: relative; overflow: visible; box-shadow: 0 1px 6px rgba(0,0,0,0.07); }
+  .tpl-card.selected { border: 2px solid #4A9EF5; box-shadow: 0 0 0 3px rgba(74,158,245,0.15); }
+  .tpl-card-dots { position: absolute; top: 10px; right: 12px; display: flex; gap: 3px; cursor: pointer; z-index: 10; }
   .tpl-card-dots span { width: 4px; height: 4px; border-radius: 50%; background: #555; display: block; }
-  .tpl-card-label { font-size: 13px; margin-top: 8px; color: #000; text-align: center; }
+  .tpl-card-label { font-size: 14px; margin-top: 10px; color: #000; text-align: center; }
+  .tpl-card-new { border: 1px dashed #ccc; border-radius: 10px; width: 160px; height: 210px; display: flex; align-items: center; justify-content: center; background: #fafafa; cursor: pointer; }
+  .tpl-card-new span { color: #5856D6; font-size: 15px; font-weight: 500; }
 
-  /* New card */
-  .tpl-card-new { border: 1px dashed #ccc; border-radius: 10px; width: 140px; height: 180px; display: flex; align-items: center; justify-content: center; background: #fafafa; cursor: pointer; }
-  .tpl-card-new span { color: #5856D6; font-size: 14px; font-weight: 500; }
-
-  /* Context menu */
-  .ctx-menu { position: absolute; top: 30px; right: -10px; background: #fff; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.15); width: 180px; z-index: 300; overflow: hidden; display: none; }
+  .ctx-menu { position: absolute; top: 40px; right: -10px; background: #fff; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.15); width: 190px; z-index: 300; overflow: hidden; display: none; }
   .ctx-menu.show { display: block; }
-  .ctx-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; font-size: 14px; color: #000; cursor: pointer; }
+  .ctx-item { display: flex; align-items: center; gap: 12px; padding: 12px 18px; font-size: 14px; color: #000; cursor: pointer; }
   .ctx-item:hover { background: #f5f5f5; }
   .ctx-item svg { width: 18px; height: 18px; flex-shrink: 0; }
 </style>
-
-<div style="min-height:600px; position:relative;">
+</head>
+<body>
 
 <!-- Page 1 -->
 <div id="page1" class="page active app">
   <div class="topbar">
-    <div class="topbar-left">未命名文件 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
+    <div class="topbar-left">
+      未命名文件
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+    </div>
     <div class="topbar-right">
-      <button style="background:#fff;border:1px solid #ccc;border-radius:6px;padding:6px 16px;font-size:14px;cursor:pointer;color:#222;">取消</button>
-      <button style="background:#5856D6;border:none;border-radius:6px;padding:6px 20px;font-size:14px;color:#fff;cursor:pointer;font-weight:500;" onclick="openModal()">下一步</button>
+      <button style="background:#fff;border:1px solid #ccc;border-radius:6px;padding:7px 18px;font-size:14px;cursor:pointer;color:#222;">取消</button>
+      <button style="background:#5856D6;border:none;border-radius:6px;padding:7px 22px;font-size:14px;color:#fff;cursor:pointer;font-weight:500;" onclick="openModal()">下一步</button>
     </div>
   </div>
   <div class="main-layout">
@@ -128,17 +132,21 @@
         </div>
       </div>
     </div>
-    <div class="doc-area"><div class="doc-paper"><div class="sig-block"><span class="sig-asterisk">✳</span><span class="sig-label">簽名</span></div></div></div>
+    <div class="doc-area">
+      <div class="doc-paper">
+        <div class="sig-block"><span class="sig-asterisk">✳</span><span class="sig-label">簽名</span></div>
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- Page 3: success then auto jump -->
+<!-- Page 3 -->
 <div id="page3" class="page app" style="display:none;">
   <div class="topbar">
     <div class="topbar-left">契約書 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
     <div class="topbar-right">
-      <button style="background:#fff;border:1px solid #ccc;border-radius:6px;padding:6px 16px;font-size:14px;cursor:pointer;color:#222;">取消</button>
-      <button style="background:#5856D6;border:none;border-radius:6px;padding:6px 20px;font-size:14px;color:#fff;cursor:pointer;font-weight:500;">下一步</button>
+      <button style="background:#fff;border:1px solid #ccc;border-radius:6px;padding:7px 18px;font-size:14px;cursor:pointer;color:#222;">取消</button>
+      <button style="background:#5856D6;border:none;border-radius:6px;padding:7px 22px;font-size:14px;color:#fff;cursor:pointer;font-weight:500;">下一步</button>
     </div>
   </div>
   <div class="main-layout">
@@ -149,59 +157,43 @@
         <div class="sidebar-group-header"><div class="label">∧ 創建欄位</div></div>
         <div class="role-selector"><div style="display:flex;align-items:center;gap:8px;"><div class="role-dot"><svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg></div><span style="font-size:14px;color:#000;">旅客</span></div><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
         <div class="field-list">
-          <div class="field-item"><div class="field-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></div>簽名</div>
-          <div class="field-item"><div class="field-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>日期</div>
-          <div class="field-item"><div class="field-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg></div>文字</div>
-          <div class="field-item"><div class="field-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>核取方塊</div>
-          <div class="field-item"><div class="field-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8"><rect x="2" y="7" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><line x1="12" y1="10" x2="22" y2="10"/><line x1="12" y1="19" x2="22" y2="19"/></svg></div>核取方塊群組</div>
-          <div class="field-item"><div class="field-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4" fill="#333"/></svg></div>選擇鈕</div>
-          <div class="field-item"><div class="field-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8"><circle cx="6" cy="8" r="3.5"/><circle cx="6" cy="8" r="1.5" fill="#333"/><circle cx="6" cy="16" r="3.5"/><line x1="12" y1="8" x2="22" y2="8"/><line x1="12" y1="16" x2="22" y2="16"/></svg></div>選擇鈕群組</div>
-          <div class="field-item"><div class="field-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>圖片</div>
-          <div class="field-item"><div class="field-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>超連結</div>
-          <div class="field-item"><div class="field-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>系統時間</div>
+          <div class="field-item">簽名</div><div class="field-item">日期</div><div class="field-item">文字</div>
+          <div class="field-item">核取方塊</div><div class="field-item">核取方塊群組</div><div class="field-item">選擇鈕</div>
+          <div class="field-item">選擇鈕群組</div><div class="field-item">圖片</div><div class="field-item">超連結</div><div class="field-item">系統時間</div>
         </div>
       </div>
     </div>
-    <div class="doc-area" style="position:relative;">
-      <div class="doc-paper"></div>
-      <div id="successToast" class="success-toast">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-        文件範本已建立。
-      </div>
-    </div>
+    <div class="doc-area"><div class="doc-paper"></div></div>
   </div>
 </div>
 
-<!-- Page 4: completed template list -->
-<div id="page4" class="page" style="display:none;flex-direction:column;min-height:600px;background:#fff;">
+<!-- Page 4 -->
+<div id="page4" class="page" style="display:none;flex-direction:column;min-height:100vh;background:#fff;">
   <div class="tpl-topbar">
     <div style="display:flex;align-items:center;">
-      <div style="width:28px;height:28px;background:#1a1a2e;border-radius:6px;display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="white"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
-      <span style="font-size:14px;font-weight:600;margin-left:8px;color:#000;">DottedSign</span>
+      <div style="width:30px;height:30px;background:#1a1a2e;border-radius:6px;display:flex;align-items:center;justify-content:center;"><svg width="17" height="17" viewBox="0 0 24 24" fill="white"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+      <span style="font-size:15px;font-weight:600;margin-left:10px;color:#000;">DottedSign</span>
     </div>
     <div class="tpl-nav"><a href="#">我的文件</a><a href="#" class="active">文件範本</a><a href="#">公開表單</a></div>
-    <div style="margin-left:auto;"><div style="width:32px;height:32px;background:#1a1a2e;border-radius:50%;display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="white"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div></div>
+    <div style="margin-left:auto;display:flex;align-items:center;gap:16px;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      <div style="width:34px;height:34px;background:#1a1a2e;border-radius:50%;display:flex;align-items:center;justify-content:center;"><svg width="17" height="17" viewBox="0 0 24 24" fill="white"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+    </div>
   </div>
-  <div style="display:flex;flex:1;">
+  <div class="tpl-layout">
     <div class="tpl-sidebar">
       <a href="#">帳戶</a><a href="#">我的檔案</a><a href="#">簽名</a><a href="#">偏好</a>
       <a href="#" class="active">文件範本</a><a href="#">標籤</a><a href="#">批次簽署任務</a><a href="#">常用簽署組合</a>
     </div>
-    <div style="flex:1;padding:24px;" onclick="handleBgClick(event)">
-      <div style="font-size:18px;font-weight:500;margin-bottom:20px;color:#000;">文件範本</div>
-      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start;">
-
-        <!-- Contract card -->
+    <div style="flex:1;padding:32px;" onclick="handleBgClick(event)">
+      <div style="font-size:20px;font-weight:500;margin-bottom:24px;color:#000;">文件範本</div>
+      <div style="display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start;">
         <div class="tpl-card-wrap" id="cardWrap" onclick="selectCard(event)">
           <div class="tpl-card" id="tplCard">
-            <div class="tpl-card-thumb">
-              <div class="tpl-card-grid"></div>
-            </div>
-            <!-- three dots -->
             <div class="tpl-card-dots" id="dotsBtn" onclick="toggleMenu(event)">
               <span></span><span></span><span></span>
             </div>
-            <!-- context menu -->
             <div class="ctx-menu" id="ctxMenu">
               <div class="ctx-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>分享到群組</div>
               <div class="ctx-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>重新命名</div>
@@ -214,16 +206,19 @@
           </div>
           <div class="tpl-card-label">契約書</div>
         </div>
-
-        <!-- New card -->
         <div style="display:flex;flex-direction:column;align-items:center;">
           <div class="tpl-card-new"><span>建立</span></div>
-          <div style="color:transparent;font-size:13px;margin-top:8px;">—</div>
+          <div style="color:transparent;font-size:14px;margin-top:10px;">—</div>
         </div>
-
       </div>
     </div>
   </div>
+</div>
+
+<!-- Success Toast -->
+<div id="successToast" class="success-toast">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+  文件範本已建立。
 </div>
 
 <!-- Modal -->
@@ -240,8 +235,8 @@
       <div class="form-field" style="margin-bottom:4px;">
         <div class="field-label">角色</div>
         <div class="role-box-single">
-          <div class="role-avatar"><svg width="13" height="13" viewBox="0 0 24 24" fill="white"><path d="M12 2C8.13 2 5 5.13 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.87-3.13-7-7-7z"/></svg></div>
-          <span>A</span>
+          <div class="role-avatar"><svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M12 2C8.13 2 5 5.13 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.87-3.13-7-7-7z"/></svg></div>
+          <span style="font-size:12px;">A</span>
         </div>
       </div>
       <a href="#" class="manage-link">管理權限</a>
@@ -251,22 +246,21 @@
     </div>
     <div class="modal-body">
       <div class="form-field">
-        <div class="field-label">標籤</div>
+        <label>標籤</label>
         <div style="position:relative;">
-          <select style="width:100%;border:1px solid #d0d0d0;border-radius:8px;padding:8px 30px 8px 12px;font-size:12px;background:#fff;color:#bbb;outline:none;font-family:inherit;appearance:none;-webkit-appearance:none;color-scheme:light;" id="tagSelect" onchange="handleTagChange(this)">
-            <option value="" disabled selected style="font-size:12px;color:#bbb;">在範本上貼標籤</option>
-            <option value="a" style="font-size:12px;color:#000;">標籤 A</option>
-            <option value="b" style="font-size:12px;color:#000;">標籤 B</option>
+          <select class="form-select" id="tagSelect" onchange="handleTagChange(this)">
+            <option value="" disabled selected>在範本上貼標籤</option>
+            <option value="a">標籤 A</option>
+            <option value="b">標籤 B</option>
           </select>
-          <svg style="position:absolute;right:10px;top:50%;transform:translateY(-50%);pointer-events:none;" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
       </div>
       <div class="form-field">
-        <div class="field-label">範本代碼</div>
+        <label>範本代碼</label>
         <input type="text" class="form-input" />
       </div>
       <div class="form-field" style="margin-bottom:8px;">
-        <div class="field-label">此文件完成檔是否要加密？</div>
+        <label>此文件完成檔是否要加密？</label>
         <div class="checkbox-row" onclick="toggleCheck()">
           <div class="custom-check" id="customCheck">
             <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -276,33 +270,33 @@
       </div>
       <div id="pwdField" style="display:none;">
         <div class="form-field" style="margin-bottom:4px;">
-          <div class="field-label">
+          <label>
             完成檔密碼
-            <div class="tooltip-wrap" id="tooltipWrap" onclick="toggleTooltip()">
+            <div class="tooltip-wrap" id="tooltipWrap">
               <div class="tooltip-icon">?</div>
               <div class="tooltip-box">僅允許英文大小寫、數字及底線，且在 50 字元以內。</div>
             </div>
-          </div>
-          <input type="text" id="pwdInput" class="form-input" placeholder="此預設密碼用於開啟簽署完成後的 PDF 檔案" oninput="validatePwd()" maxlength="60" style="background-color:#ffffff!important;color:#000000!important;-webkit-text-fill-color:#000000!important;" />
-          <div class="input-footer">
-            <div id="pwdError" class="error-msg"></div>
-            <div class="char-hint" id="charCount">0 / 50</div>
-          </div>
+          </label>
+          <input type="text" id="pwdInput" class="form-input" placeholder="此預設密碼用於開啟簽署完成後的 PDF 檔案" oninput="validatePwd()" maxlength="60" />
+          <div id="pwdError" class="error-msg"></div>
         </div>
       </div>
     </div>
     <div class="modal-footer">
       <button class="btn-cancel-modal" onclick="closeModal()">取消</button>
-      <button class="btn-confirm-modal" id="confirmBtn" onclick="confirmModal()">確認</button>
+      <button class="btn-confirm-modal" onclick="confirmModal()">確認</button>
     </div>
   </div>
-</div>
-
 </div>
 
 <script>
 let isChecked = false;
 const PWD_PATTERN = /^[A-Za-z0-9_]*$/;
+const MSG = {
+  tooLong: '輸入內容過長，請縮短至 50 字元以內',
+  badFormat: '輸入內容格式錯誤，請輸入英文大小寫、數字及底線，最多 50 字元',
+  required: '此欄位為必填',
+};
 
 function handleTagChange(sel) { sel.style.color = sel.value ? '#000' : '#bbb'; }
 
@@ -311,23 +305,16 @@ function toggleCheck() {
   const box = document.getElementById('customCheck');
   const field = document.getElementById('pwdField');
   if (isChecked) { box.classList.add('checked'); field.style.display = 'block'; }
-  else { box.classList.remove('checked'); field.style.display = 'none'; document.getElementById('pwdInput').value = ''; clearError(); updateCharCount(0); }
+  else { box.classList.remove('checked'); field.style.display = 'none'; document.getElementById('pwdInput').value = ''; clearError(); }
 }
 
 function validatePwd() {
   const val = document.getElementById('pwdInput').value;
-  updateCharCount(val.length);
   const errEl = document.getElementById('pwdError');
   const input = document.getElementById('pwdInput');
-  if (val.length > 50) { input.classList.add('error'); errEl.textContent = '輸入內容過長，請縮短至 50 字元以內'; errEl.classList.add('show'); }
-  else if (val.length > 0 && !PWD_PATTERN.test(val)) { input.classList.add('error'); errEl.textContent = '輸入內容格式錯誤，請輸入英文大小寫、數字及底線，最多 50 字元'; errEl.classList.add('show'); }
+  if (val.length > 50) { input.classList.add('error'); errEl.textContent = MSG.tooLong; errEl.classList.add('show'); }
+  else if (val.length > 0 && !PWD_PATTERN.test(val)) { input.classList.add('error'); errEl.textContent = MSG.badFormat; errEl.classList.add('show'); }
   else { clearError(); }
-}
-
-function updateCharCount(len) {
-  const el = document.getElementById('charCount');
-  el.textContent = len + ' / 50';
-  el.style.color = len > 50 ? '#E53535' : '#aaa';
 }
 
 function clearError() {
@@ -336,7 +323,7 @@ function clearError() {
   e.textContent = ''; e.classList.remove('show');
 }
 
-function toggleTooltip() { document.getElementById('tooltipWrap').classList.toggle('active'); }
+
 function openModal() { document.getElementById('modalOverlay').classList.add('active'); }
 function closeModal() {
   document.getElementById('modalOverlay').classList.remove('active');
@@ -344,7 +331,7 @@ function closeModal() {
   document.getElementById('customCheck').classList.remove('checked');
   document.getElementById('pwdField').style.display = 'none';
   document.getElementById('pwdInput').value = '';
-  clearError(); updateCharCount(0);
+  clearError();
 }
 function closeOnBg(e) { if (e.target === document.getElementById('modalOverlay')) closeModal(); }
 
@@ -353,17 +340,15 @@ function confirmModal() {
     const val = document.getElementById('pwdInput').value.trim();
     const errEl = document.getElementById('pwdError');
     const input = document.getElementById('pwdInput');
-    if (!val) { input.classList.add('error'); errEl.textContent = '此欄位為必填'; errEl.classList.add('show'); return; }
-    if (val.length > 50) { input.classList.add('error'); errEl.textContent = '輸入內容過長，請縮短至 50 字元以內'; errEl.classList.add('show'); return; }
-    if (!PWD_PATTERN.test(val)) { input.classList.add('error'); errEl.textContent = '輸入內容格式錯誤，請輸入英文大小寫、數字及底線，最多 50 字元'; errEl.classList.add('show'); return; }
+    if (!val) { input.classList.add('error'); errEl.textContent = MSG.required; errEl.classList.add('show'); return; }
+    if (val.length > 50) { input.classList.add('error'); errEl.textContent = MSG.tooLong; errEl.classList.add('show'); return; }
+    if (!PWD_PATTERN.test(val)) { input.classList.add('error'); errEl.textContent = MSG.badFormat; errEl.classList.add('show'); return; }
   }
-
   closeModal();
   document.getElementById('page1').style.display = 'none';
   document.getElementById('page1').classList.remove('active');
   const p3 = document.getElementById('page3');
   p3.style.display = 'flex'; p3.classList.add('active');
-
   setTimeout(() => { document.getElementById('successToast').classList.add('active'); }, 200);
   setTimeout(() => {
     document.getElementById('successToast').classList.remove('active');
@@ -374,14 +359,11 @@ function confirmModal() {
   }, 2200);
 }
 
-// Page 4 card interactions
 function selectCard(e) {
   if (e.target.closest('.tpl-card-dots') || e.target.closest('.ctx-menu')) return;
   const card = document.getElementById('tplCard');
   card.classList.toggle('selected');
-  if (!card.classList.contains('selected')) {
-    document.getElementById('ctxMenu').classList.remove('show');
-  }
+  if (!card.classList.contains('selected')) document.getElementById('ctxMenu').classList.remove('show');
 }
 
 function toggleMenu(e) {
@@ -396,3 +378,5 @@ function handleBgClick(e) {
   }
 }
 </script>
+</body>
+</html>
